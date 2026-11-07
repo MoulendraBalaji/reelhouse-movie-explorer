@@ -67,15 +67,15 @@ void main() {
 
     test('UserProfile copyWith updates specific fields', () {
       const user = UserProfile(
-        name: 'Moulendra Balaji',
-        email: 'moulendra@reelhouse.cinema',
+        name: 'Arthur Pendelton',
+        email: 'archivist@reelhouse.cinema',
         bio: 'Projectionist apprentice.',
         memberSince: '1974',
         favoriteGenre: 'Sci-Fi',
       );
 
       final updated = user.copyWith(favoriteGenre: 'Film Noir');
-      expect(updated.name, 'Moulendra Balaji');
+      expect(updated.name, 'Arthur Pendelton');
       expect(updated.favoriteGenre, 'Film Noir');
     });
   });

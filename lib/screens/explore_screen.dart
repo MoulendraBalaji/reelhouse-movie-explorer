@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../core/responsive.dart';
 import '../theme/tokens.dart';
+import '../theme/app_theme.dart';
 import '../theme/text_styles.dart';
 import '../models/movie.dart';
 import '../providers/movie_provider.dart';
@@ -97,84 +98,91 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   const SizedBox(height: 20),
 
                   // Secondary Filter Row: Sort by dropdown + Year range slider
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    spacing: 24,
-                    runSpacing: 16,
-                    children: [
-                      // Sort Dropdown
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
+                  Builder(
+                    builder: (context) {
+                      final colors = context.cinemaColors;
+                      return Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: 24,
+                        runSpacing: 16,
                         children: [
-                          Text('SORT BY:', style: CinemaText.monoLabel(color: CinemaTokens.ash)),
-                          const SizedBox(width: 8),
-                          DropdownButton<MovieSortOption>(
-                            value: _sortOption,
-                            dropdownColor: CinemaTokens.boothBrown,
-                            underline: Container(height: 1, color: CinemaTokens.projectorAmber),
-                            style: CinemaText.monoMeta(color: CinemaTokens.projectorAmber),
-                            items: const [
-                              DropdownMenuItem(
-                                value: MovieSortOption.ratingDesc,
-                                child: Text('HIGHEST RATED'),
-                              ),
-                              DropdownMenuItem(
-                                value: MovieSortOption.yearDesc,
-                                child: Text('NEWEST TO OLDEST'),
-                              ),
-                              DropdownMenuItem(
-                                value: MovieSortOption.titleAsc,
-                                child: Text('FILM TITLE (A-Z)'),
+                          // Sort Dropdown
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('SORT BY:', style: CinemaText.monoLabel(color: colors.textMuted)),
+                              const SizedBox(width: 8),
+                              DropdownButton<MovieSortOption>(
+                                value: _sortOption,
+                                dropdownColor: colors.surface,
+                                underline: Container(height: 1, color: colors.accentAmber),
+                                style: CinemaText.monoMeta(color: colors.accentAmber),
+                                items: [
+                                  DropdownMenuItem(
+                                    value: MovieSortOption.ratingDesc,
+                                    child: Text('HIGHEST RATED', style: TextStyle(color: colors.textPrimary)),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: MovieSortOption.yearDesc,
+                                    child: Text('NEWEST TO OLDEST', style: TextStyle(color: colors.textPrimary)),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: MovieSortOption.titleAsc,
+                                    child: Text('FILM TITLE (A-Z)', style: TextStyle(color: colors.textPrimary)),
+                                  ),
+                                ],
+                                onChanged: (opt) {
+                                  if (opt != null) {
+                                    setState(() => _sortOption = opt);
+                                  }
+                                },
                               ),
                             ],
-                            onChanged: (opt) {
-                              if (opt != null) {
-                                setState(() => _sortOption = opt);
-                              }
-                            },
                           ),
-                        ],
-                      ),
 
-                      // Year Range Slider
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'ERA: ${_yearRange.start.toInt()} – ${_yearRange.end.toInt()}',
-                            style: CinemaText.monoLabel(color: CinemaTokens.ash),
-                          ),
-                          SizedBox(
-                            width: 200,
-                            child: RangeSlider(
-                              values: _yearRange,
-                              min: 1920,
-                              max: 2025,
-                              divisions: 21,
-                              labels: RangeLabels(
-                                '${_yearRange.start.toInt()}',
-                                '${_yearRange.end.toInt()}',
+                          // Year Range Slider
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'ERA: ${_yearRange.start.toInt()} – ${_yearRange.end.toInt()}',
+                                style: CinemaText.monoLabel(color: colors.textMuted),
                               ),
-                              onChanged: (vals) => setState(() => _yearRange = vals),
+                              SizedBox(
+                                width: 200,
+                                child: RangeSlider(
+                                  values: _yearRange,
+                                  min: 1920,
+                                  max: 2025,
+                                  divisions: 21,
+                                  activeColor: colors.accentAmber,
+                                  inactiveColor: colors.borderHairline,
+                                  labels: RangeLabels(
+                                    '${_yearRange.start.toInt()}',
+                                    '${_yearRange.end.toInt()}',
+                                  ),
+                                  onChanged: (vals) => setState(() => _yearRange = vals),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          // Result count badge
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: colors.surfaceElevated,
+                              border: Border.all(color: colors.borderHairline),
+                              borderRadius: CinemaTokens.borderSharp,
+                            ),
+                            child: Text(
+                              '${displayedMovies.length} REELS FOUND',
+                              style: CinemaText.monoBadge(color: colors.accentAmber),
                             ),
                           ),
                         ],
-                      ),
-
-                      // Result count badge
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: CinemaTokens.boothBrown,
-                          border: Border.all(color: CinemaTokens.hairline),
-                          borderRadius: CinemaTokens.borderSharp,
-                        ),
-                        child: Text(
-                          '${displayedMovies.length} REELS FOUND',
-                          style: CinemaText.monoBadge(color: CinemaTokens.projectorAmber),
-                        ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
 
                   const SizedBox(height: 28),

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../core/responsive.dart';
 import '../theme/tokens.dart';
+import '../theme/app_theme.dart';
 import '../theme/text_styles.dart';
 import '../models/movie.dart';
 import '../providers/search_provider.dart';
@@ -70,23 +71,32 @@ class _SearchScreenState extends State<SearchScreen> {
                   const SizedBox(height: 24),
 
                   // Search Input Field
-                  TextField(
-                    controller: _textController,
-                    onChanged: (val) => searchProvider.onQueryChanged(val),
-                    style: CinemaText.bodyLarge(color: CinemaTokens.bone),
-                    decoration: InputDecoration(
-                      hintText: 'Search by title, director, actor, or genre (e.g. Nolan, Sci-Fi)...',
-                      prefixIcon: const Icon(Icons.search, color: CinemaTokens.projectorAmber),
-                      suffixIcon: _textController.text.isNotEmpty
-                          ? IconButton(
-                              icon: const Icon(Icons.clear, color: CinemaTokens.ash),
-                              onPressed: () {
-                                _textController.clear();
-                                searchProvider.onQueryChanged('');
-                              },
-                            )
-                          : null,
-                    ),
+                  Builder(
+                    builder: (context) {
+                      final colors = context.cinemaColors;
+                      return TextField(
+                        controller: _textController,
+                        onChanged: (val) => searchProvider.onQueryChanged(val),
+                        style: TextStyle(
+                          fontFamily: CinemaTokens.fontSerif,
+                          fontSize: 16,
+                          color: colors.textPrimary,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Search by title, director, actor, or genre (e.g. Nolan, Sci-Fi)...',
+                          prefixIcon: Icon(Icons.search, color: colors.accentAmber),
+                          suffixIcon: _textController.text.isNotEmpty
+                              ? IconButton(
+                                  icon: Icon(Icons.clear, color: colors.textMuted),
+                                  onPressed: () {
+                                    _textController.clear();
+                                    searchProvider.onQueryChanged('');
+                                  },
+                                )
+                              : null,
+                        ),
+                      );
+                    },
                   ),
 
                   const SizedBox(height: 16),
@@ -95,11 +105,11 @@ class _SearchScreenState extends State<SearchScreen> {
                   if (searchProvider.recentSearches.isNotEmpty) ...[
                     Row(
                       children: [
-                        Text('RECENT DISPATCHES:', style: CinemaText.monoLabel(color: CinemaTokens.ash)),
+                        Text('RECENT DISPATCHES:', style: CinemaText.monoLabel(color: context.cinemaColors.textMuted)),
                         const Spacer(),
                         TextButton(
                           onPressed: () => searchProvider.clearRecent(),
-                          child: Text('CLEAR ALL', style: CinemaText.monoBadge(color: CinemaTokens.ash)),
+                          child: Text('CLEAR ALL', style: CinemaText.monoBadge(color: context.cinemaColors.textMuted)),
                         ),
                       ],
                     ),

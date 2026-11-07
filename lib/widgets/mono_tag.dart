@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import '../theme/tokens.dart';
+import '../theme/app_theme.dart';
 
 class MonoTag extends StatelessWidget {
   final String label;
@@ -20,11 +21,12 @@ class MonoTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.cinemaColors;
     final textColor = isSelected
-        ? CinemaTokens.celluloidBlack
-        : (onTap != null ? CinemaTokens.bone : CinemaTokens.ash);
-    final bgColor = isSelected ? CinemaTokens.projectorAmber : Colors.transparent;
-    final borderColor = isSelected ? CinemaTokens.projectorAmber : CinemaTokens.hairline;
+        ? Colors.black
+        : (onTap != null ? colors.textPrimary : colors.textMuted);
+    final bgColor = isSelected ? colors.accentAmber : Colors.transparent;
+    final borderColor = isSelected ? colors.accentAmber : colors.borderHairline;
 
     return InkWell(
       onTap: onTap,

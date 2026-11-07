@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../core/responsive.dart';
 import '../theme/tokens.dart';
+import '../theme/app_theme.dart';
 import '../theme/text_styles.dart';
 import '../models/movie.dart';
 import '../providers/watchlist_provider.dart';
@@ -120,93 +121,96 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                       arguments: movie.id,
                                     );
                                   },
-                                  child: Container(
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      color: CinemaTokens.boothBrown,
-                                      border: Border.all(color: CinemaTokens.hairline),
-                                      borderRadius: CinemaTokens.borderSharp,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        // Poster thumbnail
-                                        SizedBox(
-                                          width: 72,
-                                          height: 100,
-                                          child: PosterImage(
-                                            imageUrl: movie.posterUrl,
-                                            title: movie.title,
-                                          ),
+                                  child: Builder(
+                                    builder: (context) {
+                                      final colors = context.cinemaColors;
+                                      return Container(
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          color: colors.surface,
+                                          border: Border.all(color: colors.borderHairline),
+                                          borderRadius: CinemaTokens.borderSharp,
                                         ),
-                                        const SizedBox(width: 16),
-
-                                        // Details
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                movie.title.toUpperCase(),
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontFamily: CinemaTokens.fontDisplay,
-                                                  fontSize: 20,
-                                                  letterSpacing: 1.0,
-                                                  color: CinemaTokens.bone,
-                                                ),
+                                        child: Row(
+                                          children: [
+                                            // Poster thumbnail
+                                            SizedBox(
+                                              width: 72,
+                                              height: 100,
+                                              child: PosterImage(
+                                                imageUrl: movie.posterUrl,
+                                                title: movie.title,
                                               ),
-                                              const SizedBox(height: 4),
-                                              Row(
+                                            ),
+                                            const SizedBox(width: 16),
+
+                                            // Details
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
-                                                  Text('${movie.year}', style: CinemaText.monoMeta(color: CinemaTokens.projectorAmber)),
-                                                  const SizedBox(width: 8),
-                                                  Text('•', style: TextStyle(color: CinemaTokens.ash)),
-                                                  const SizedBox(width: 8),
-                                                  Text(movie.formattedRuntime, style: CinemaText.monoMeta(color: CinemaTokens.ash)),
+                                                  Text(
+                                                    movie.title.toUpperCase(),
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                      fontFamily: CinemaTokens.fontDisplay,
+                                                      fontSize: 20,
+                                                      letterSpacing: 1.0,
+                                                      color: colors.textPrimary,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 4),
+                                                  Row(
+                                                    children: [
+                                                      Text('${movie.year}', style: CinemaText.monoMeta(color: colors.accentAmber)),
+                                                      const SizedBox(width: 8),
+                                                      Text('•', style: TextStyle(color: colors.textMuted)),
+                                                      const SizedBox(width: 8),
+                                                      Text(movie.formattedRuntime, style: CinemaText.monoMeta(color: colors.textMuted)),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(height: 6),
+                                                  ClapperRating(rating: movie.rating, size: 12),
                                                 ],
                                               ),
-                                              const SizedBox(height: 6),
-                                              ClapperRating(rating: movie.rating, size: 12),
-                                            ],
-                                          ),
-                                        ),
+                                            ),
 
-                                        // Mark Watched Toggle Button
-                                        IconButton(
-                                          icon: Icon(
-                                            watchlistProvider.isWatched(movie.id)
-                                                ? Icons.check_circle
-                                                : Icons.check_circle_outline,
-                                            color: watchlistProvider.isWatched(movie.id)
-                                                ? CinemaTokens.projectorAmber
-                                                : CinemaTokens.ash,
-                                          ),
-                                          tooltip: watchlistProvider.isWatched(movie.id)
-                                              ? 'Mark as Unwatched'
-                                              : 'Mark as Watched',
-                                          onPressed: () {
-                                            watchlistProvider.toggleWatched(movie.id);
-                                          },
-                                        ),
+                                            // Mark Watched Toggle Button
+                                            IconButton(
+                                              icon: Icon(
+                                                watchlistProvider.isWatched(movie.id)
+                                                    ? Icons.check_circle
+                                                    : Icons.check_circle_outline,
+                                                color: watchlistProvider.isWatched(movie.id)
+                                                    ? colors.accentAmber
+                                                    : colors.textMuted,
+                                              ),
+                                              tooltip: watchlistProvider.isWatched(movie.id)
+                                                  ? 'Mark as Unwatched'
+                                                  : 'Mark as Watched',
+                                              onPressed: () {
+                                                watchlistProvider.toggleWatched(movie.id);
+                                              },
+                                            ),
 
                                         // Delete Button
                                         IconButton(
-                                          icon: const Icon(Icons.delete_outline, color: CinemaTokens.ash),
+                                          icon: Icon(Icons.delete_outline, color: colors.textMuted),
                                           tooltip: 'Remove from Watchlist',
                                           onPressed: () {
                                             watchlistProvider.removeFromWatchlist(movie.id);
                                             ScaffoldMessenger.of(context).showSnackBar(
                                               SnackBar(
-                                                backgroundColor: CinemaTokens.boothBrown,
+                                                backgroundColor: colors.surfaceElevated,
                                                 content: Text(
                                                   '${movie.title} removed from vault',
-                                                  style: CinemaText.monoLabel(color: CinemaTokens.bone),
+                                                  style: CinemaText.monoLabel(color: colors.textPrimary),
                                                 ),
                                                 action: SnackBarAction(
                                                   label: 'RESTORE',
-                                                  textColor: CinemaTokens.projectorAmber,
+                                                  textColor: colors.accentAmber,
                                                   onPressed: () => watchlistProvider.undoRemove(),
                                                 ),
                                               ),
@@ -216,11 +220,13 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                         const SizedBox(width: 8),
                                       ],
                                     ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                   ),
 
                   const SizedBox(height: 48),

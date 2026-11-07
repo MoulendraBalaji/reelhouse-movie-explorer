@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import '../../theme/tokens.dart';
+import '../../theme/app_theme.dart';
 import '../../theme/motion.dart';
 import '../../theme/text_styles.dart';
 
@@ -72,6 +73,8 @@ class ClapperboardClapState extends State<ClapperboardClap>
       return widget.successChild ?? const SizedBox.shrink();
     }
 
+    final colors = context.cinemaColors;
+
     return RepaintBoundary(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -90,8 +93,8 @@ class ClapperboardClapState extends State<ClapperboardClap>
                   height: 80,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: CinemaTokens.boothBrown,
-                      border: Border.all(color: CinemaTokens.hairline),
+                      color: colors.surface,
+                      border: Border.all(color: colors.borderHairline),
                       borderRadius: CinemaTokens.borderSharp,
                     ),
                     padding: const EdgeInsets.all(8),
@@ -101,8 +104,8 @@ class ClapperboardClapState extends State<ClapperboardClap>
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('SCENE: 01', style: CinemaText.monoBadge(color: CinemaTokens.ash)),
-                            Text('TAKE: 04', style: CinemaText.monoBadge(color: CinemaTokens.projectorAmber)),
+                            Text('SCENE: 01', style: CinemaText.monoBadge(color: colors.textMuted)),
+                            Text('TAKE: 04', style: CinemaText.monoBadge(color: colors.accentAmber)),
                           ],
                         ),
                         const Spacer(),
@@ -113,7 +116,7 @@ class ClapperboardClapState extends State<ClapperboardClap>
                               fontFamily: CinemaTokens.fontDisplay,
                               fontSize: 20,
                               letterSpacing: 2,
-                              color: _clapped ? CinemaTokens.projectorAmber : CinemaTokens.bone,
+                              color: _clapped ? colors.accentAmber : colors.textPrimary,
                             ),
                           ),
                         ),

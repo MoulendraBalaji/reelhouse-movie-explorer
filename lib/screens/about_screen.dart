@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../core/responsive.dart';
 import '../core/validators.dart';
 import '../theme/tokens.dart';
+import '../theme/app_theme.dart';
 import '../theme/text_styles.dart';
 import '../widgets/app_scaffold.dart';
 import '../widgets/section_header.dart';
@@ -46,8 +47,8 @@ class _AboutScreenState extends State<AboutScreen> {
       setState(() => _submitted = true);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          backgroundColor: CinemaTokens.boothBrown,
-          content: Text('DISPATCH SENT TO REELHOUSE BOOTH', style: CinemaText.monoBadge(color: CinemaTokens.projectorAmber)),
+          backgroundColor: context.cinemaColors.surfaceElevated,
+          content: Text('DISPATCH SENT TO REELHOUSE BOOTH', style: CinemaText.monoBadge(color: context.cinemaColors.accentAmber)),
         ),
       );
       _nameController.clear();
@@ -58,6 +59,8 @@ class _AboutScreenState extends State<AboutScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.cinemaColors;
+
     return AppScaffold(
       currentNavIndex: 5,
       body: SingleChildScrollView(
@@ -79,14 +82,14 @@ class _AboutScreenState extends State<AboutScreen> {
                   Container(
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
-                      color: CinemaTokens.boothBrown,
-                      border: Border.all(color: CinemaTokens.hairline),
+                      color: colors.surface,
+                      border: Border.all(color: colors.borderHairline),
                       borderRadius: CinemaTokens.borderSharp,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('THE MANIFESTO', style: CinemaText.monoBadge(color: CinemaTokens.projectorAmber)),
+                        Text('THE MANIFESTO', style: CinemaText.monoBadge(color: colors.accentAmber)),
                         const SizedBox(height: 12),
                         Text(
                           '“EVERY FILM, ONE REEL AT A TIME”',
@@ -94,7 +97,7 @@ class _AboutScreenState extends State<AboutScreen> {
                             fontFamily: CinemaTokens.fontDisplay,
                             fontSize: 32,
                             letterSpacing: 2,
-                            color: CinemaTokens.bone,
+                            color: colors.textPrimary,
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -103,7 +106,12 @@ class _AboutScreenState extends State<AboutScreen> {
                           'Built entirely in Flutter Web, it transforms standard algorithmic streaming lists into a tactile, physical 35mm celluloid archive. '
                           'From mechanical clock countdowns and rotating sweep hands to authentic ticket-tearing, clapperboard critique logging, '
                           'and projector beam dust motes, every interaction honors real projection hardware.',
-                          style: CinemaText.bodyLarge(color: CinemaTokens.bone),
+                          style: TextStyle(
+                            fontFamily: CinemaTokens.fontSerif,
+                            fontSize: 16.0,
+                            height: 1.6,
+                            color: colors.textPrimary,
+                          ),
                         ),
                       ],
                     ),
@@ -118,7 +126,7 @@ class _AboutScreenState extends State<AboutScreen> {
                       fontFamily: CinemaTokens.fontDisplay,
                       fontSize: 24,
                       letterSpacing: 2,
-                      color: CinemaTokens.projectorAmber,
+                      color: colors.accentAmber,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -127,12 +135,12 @@ class _AboutScreenState extends State<AboutScreen> {
                     spacing: 16,
                     runSpacing: 16,
                     children: [
-                      _buildTechCard('FRAMEWORK', 'Flutter 3.44+ Web (CanvasKit)', 'Engineered for smooth 60fps rendering'),
-                      _buildTechCard('STATE MANAGEMENT', 'Provider + ChangeNotifier', 'Clean MultiProvider root architecture'),
-                      _buildTechCard('TYPOGRAPHY', 'Bebas Neue, Fraunces, Space Mono', 'Fully bundled offline TTF fonts'),
-                      _buildTechCard('DATA SOURCE', 'TMDB API & Offline JSON', 'Resilient 42-movie offline fallback reel'),
-                      _buildTechCard('MOTION DESIGN', '18 Signature Custom Animations', 'CustomPainters, Matrix4, Springs, Clapper'),
-                      _buildTechCard('DEPLOYMENT', 'GitHub Pages & GitHub Actions', 'Automated CI/CD with release optimization'),
+                      _buildTechCard(context, 'FRAMEWORK', 'Flutter 3.44+ Web (CanvasKit)', 'Engineered for smooth 60fps rendering'),
+                      _buildTechCard(context, 'STATE MANAGEMENT', 'Provider + ChangeNotifier', 'Clean MultiProvider root architecture'),
+                      _buildTechCard(context, 'TYPOGRAPHY', 'Bebas Neue, Fraunces, Space Mono', 'Fully bundled offline TTF fonts'),
+                      _buildTechCard(context, 'DATA SOURCE', 'TMDB API & Offline JSON', 'Resilient 42-movie offline fallback reel'),
+                      _buildTechCard(context, 'MOTION DESIGN', '18 Signature Custom Animations', 'CustomPainters, Matrix4, Springs, Clapper'),
+                      _buildTechCard(context, 'DEPLOYMENT', 'GitHub Pages & GitHub Actions', 'Automated CI/CD with release optimization'),
                     ],
                   ),
 
@@ -142,8 +150,8 @@ class _AboutScreenState extends State<AboutScreen> {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: CinemaTokens.celluloidBlack,
-                      border: Border.all(color: CinemaTokens.projectorAmber, width: 1.5),
+                      color: colors.surfaceElevated,
+                      border: Border.all(color: colors.accentAmber, width: 1.5),
                       borderRadius: CinemaTokens.borderSharp,
                     ),
                     child: Row(
@@ -151,22 +159,22 @@ class _AboutScreenState extends State<AboutScreen> {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            border: Border.all(color: CinemaTokens.projectorAmber),
+                            border: Border.all(color: colors.accentAmber),
                             shape: BoxShape.circle,
                           ),
-                          child: const Icon(Icons.movie_creation, color: CinemaTokens.projectorAmber, size: 28),
+                          child: Icon(Icons.movie_creation, color: colors.accentAmber, size: 28),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('TMDB ATTRIBUTION STATEMENT', style: CinemaText.monoBadge(color: CinemaTokens.projectorAmber)),
+                              Text('TMDB ATTRIBUTION STATEMENT', style: CinemaText.monoBadge(color: colors.accentAmber)),
                               const SizedBox(height: 4),
                               Text(
                                 'This product uses the TMDB API but is not endorsed or certified by TMDB. '
                                 'All film titles, promotional poster artwork, synopses, and cast data are copyright of their respective production studios.',
-                                style: CinemaText.bodySmall(color: CinemaTokens.bone),
+                                style: CinemaText.bodySmall(color: colors.textPrimary),
                               ),
                             ],
                           ),
@@ -184,7 +192,7 @@ class _AboutScreenState extends State<AboutScreen> {
                       fontFamily: CinemaTokens.fontDisplay,
                       fontSize: 24,
                       letterSpacing: 2,
-                      color: CinemaTokens.projectorAmber,
+                      color: colors.accentAmber,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -192,8 +200,8 @@ class _AboutScreenState extends State<AboutScreen> {
                   Container(
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
-                      color: CinemaTokens.boothBrown,
-                      border: Border.all(color: CinemaTokens.hairline),
+                      color: colors.surface,
+                      border: Border.all(color: colors.borderHairline),
                       borderRadius: CinemaTokens.borderSharp,
                     ),
                     child: Form(
@@ -204,23 +212,23 @@ class _AboutScreenState extends State<AboutScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('SEND A TELEGRAM TO THE PROJECTION BOOTH', style: CinemaText.monoLabel(color: CinemaTokens.projectorAmber)),
+                              Text('SEND A TELEGRAM TO THE PROJECTION BOOTH', style: CinemaText.monoLabel(color: colors.accentAmber)),
                               if (_submitted)
-                                Text('DISPATCH RECEIVED', style: CinemaText.monoBadge(color: CinemaTokens.projectorAmber)),
+                                Text('DISPATCH RECEIVED', style: CinemaText.monoBadge(color: colors.accentAmber)),
                             ],
                           ),
                           const SizedBox(height: 16),
                           TextFormField(
                             controller: _nameController,
                             validator: CinemaValidators.validateName,
-                            style: CinemaText.bodyMedium(color: CinemaTokens.bone),
+                            style: TextStyle(fontFamily: CinemaTokens.fontSerif, fontSize: 14, color: colors.textPrimary),
                             decoration: const InputDecoration(labelText: 'Patron Name'),
                           ),
                           const SizedBox(height: 14),
                           TextFormField(
                             controller: _emailController,
                             validator: CinemaValidators.validateEmail,
-                            style: CinemaText.bodyMedium(color: CinemaTokens.bone),
+                            style: TextStyle(fontFamily: CinemaTokens.fontSerif, fontSize: 14, color: colors.textPrimary),
                             decoration: const InputDecoration(labelText: 'Patron Dispatch Email'),
                           ),
                           const SizedBox(height: 14),
@@ -228,7 +236,7 @@ class _AboutScreenState extends State<AboutScreen> {
                             controller: _msgController,
                             validator: CinemaValidators.validateFeedbackMessage,
                             maxLines: 4,
-                            style: CinemaText.bodyMedium(color: CinemaTokens.bone),
+                            style: TextStyle(fontFamily: CinemaTokens.fontSerif, fontSize: 14, color: colors.textPrimary),
                             decoration: const InputDecoration(labelText: 'Message / Film Inquiries (min 10 chars)'),
                           ),
                           const SizedBox(height: 18),
@@ -252,23 +260,26 @@ class _AboutScreenState extends State<AboutScreen> {
     );
   }
 
-  Widget _buildTechCard(String title, String main, String desc) {
+  Widget _buildTechCard(BuildContext context, String title, String main, String desc) {
+    final colors = context.cinemaColors;
+    final isMobile = Responsive.isMobile(context);
+
     return Container(
-      width: 360,
+      width: isMobile ? double.infinity : 360,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: CinemaTokens.boothBrown,
-        border: Border.all(color: CinemaTokens.hairline),
+        color: colors.surface,
+        border: Border.all(color: colors.borderHairline),
         borderRadius: CinemaTokens.borderSharp,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: CinemaText.monoBadge(color: CinemaTokens.projectorAmber)),
+          Text(title, style: CinemaText.monoBadge(color: colors.accentAmber)),
           const SizedBox(height: 6),
-          Text(main, style: CinemaText.monoMeta(color: CinemaTokens.bone)),
+          Text(main, style: TextStyle(fontFamily: CinemaTokens.fontMono, fontSize: 13, color: colors.textPrimary)),
           const SizedBox(height: 4),
-          Text(desc, style: CinemaText.bodySmall(color: CinemaTokens.ash)),
+          Text(desc, style: CinemaText.bodySmall(color: colors.textMuted)),
         ],
       ),
     );

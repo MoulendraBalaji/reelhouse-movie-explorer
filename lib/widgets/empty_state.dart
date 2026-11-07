@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import '../theme/tokens.dart';
+import '../theme/app_theme.dart';
 import '../theme/text_styles.dart';
 
 class EmptyState extends StatelessWidget {
@@ -19,6 +20,8 @@ class EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.cinemaColors;
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32.0),
@@ -29,26 +32,27 @@ class EmptyState extends StatelessWidget {
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                border: Border.all(color: CinemaTokens.hairline, width: 2),
+                border: Border.all(color: colors.borderHairline, width: 2),
                 shape: BoxShape.circle,
-                color: CinemaTokens.boothBrown,
+                color: colors.surfaceElevated,
               ),
-              child: const Center(
+              child: Center(
                 child: Icon(
                   Icons.camera_roll_outlined,
                   size: 36,
-                  color: CinemaTokens.ash,
+                  color: colors.accentAmber,
                 ),
               ),
             ),
             const SizedBox(height: 20),
             Text(
               title,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: CinemaTokens.fontDisplay,
                 fontSize: 28,
                 letterSpacing: 2,
-                color: CinemaTokens.bone,
+                color: colors.textPrimary,
               ),
             ),
             const SizedBox(height: 8),
@@ -57,7 +61,7 @@ class EmptyState extends StatelessWidget {
               child: Text(
                 message,
                 textAlign: TextAlign.center,
-                style: CinemaText.bodyMedium(color: CinemaTokens.ash),
+                style: CinemaText.bodyMedium(color: colors.textMuted),
               ),
             ),
             if (action != null) ...[

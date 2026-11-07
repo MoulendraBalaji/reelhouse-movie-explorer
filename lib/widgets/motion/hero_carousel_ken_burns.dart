@@ -2,9 +2,9 @@
 // HeroCarouselKenBurns: Cinematic hero section with slow Ken Burns pan/zoom, masked title reveal,
 // film-burn dissolve between slides, and animated progress bar.
 
-import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../theme/tokens.dart';
+import '../../theme/app_theme.dart';
 import '../../theme/motion.dart';
 import '../../theme/text_styles.dart';
 import '../../models/movie.dart';
@@ -34,20 +34,11 @@ class _HeroCarouselKenBurnsState extends State<HeroCarouselKenBurns>
   late final AnimationController _titleRevealController;
 
   int _currentIndex = 0;
-  Timer? _autoAdvanceTimer;
-  double _pageScrollOffset = 0.0;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
-    _pageController.addListener(() {
-      if (mounted) {
-        setState(() {
-          _pageScrollOffset = _pageController.page ?? 0.0;
-        });
-      }
-    });
 
     // Ken Burns slow zoom and subtle pan (8 seconds per cycle)
     _kenBurnsController = AnimationController(
@@ -94,7 +85,6 @@ class _HeroCarouselKenBurnsState extends State<HeroCarouselKenBurns>
 
   @override
   void dispose() {
-    _autoAdvanceTimer?.cancel();
     _pageController.dispose();
     _kenBurnsController.dispose();
     _progressController.dispose();
@@ -107,11 +97,17 @@ class _HeroCarouselKenBurnsState extends State<HeroCarouselKenBurns>
     if (widget.movies.isEmpty) return const SizedBox.shrink();
 
     final isReduced = CinemaMotion.isReducedMotion(context);
+    final colors = context.cinemaColors;
+    final width = MediaQuery.of(context).size.width;
+    final isMobile = width < 600;
+    final isTablet = width >= 600 && width < 1024;
+    final heroHeight = isMobile ? 440.0 : 520.0;
+    final titleFontSize = isMobile ? 30.0 : (isTablet ? 38.0 : 48.0);
 
     return RepaintBoundary(
       child: Container(
-        height: 520,
-        color: CinemaTokens.celluloidBlack,
+        height: heroHeight,
+        color: colors.bg,
         child: Stack(
           children: [
             // PageView of Film Backdrops with Ken Burns & Parallax
@@ -126,19 +122,22 @@ class _HeroCarouselKenBurnsState extends State<HeroCarouselKenBurns>
               },
               itemBuilder: (context, index) {
                 final movie = widget.movies[index];
-                // Parallax offset relative to current page
-                final pageDiff = index - _pageScrollOffset;
-                final parallaxX = pageDiff * 60.0;
 
                 return AnimatedBuilder(
-                  animation: _kenBurnsController,
+                  animation: Listenable.merge([_kenBurnsController, _pageController]),
                   builder: (context, _) {
+                    final pageOffset = _pageController.hasClients && _pageController.page != null
+                        ? _pageController.page!
+                        : _currentIndex.toDouble();
+                    final pageDiff = index - pageOffset;
+                    final parallaxX = pageDiff * 50.0;
+
                     final zoom = isReduced
-                        ? 1.05
-                        : 1.05 + (_kenBurnsController.value * 0.10); // 1.05 to 1.15
+                        ? 1.04
+                        : 1.04 + (_kenBurnsController.value * 0.08);
                     final panY = isReduced
                         ? 0.0
-                        : (_kenBurnsController.value - 0.5) * 16.0;
+                        : (_kenBurnsController.value - 0.5) * 12.0;
 
                     return Stack(
                       fit: StackFit.expand,
@@ -156,27 +155,27 @@ class _HeroCarouselKenBurnsState extends State<HeroCarouselKenBurns>
                               ),
                               fit: BoxFit.cover,
                               errorBuilder: (ctx, err, stack) => Container(
-                                color: CinemaTokens.boothBrown,
-                                child: const Center(
-                                  child: Icon(Icons.movie, size: 64, color: CinemaTokens.ash),
+                                color: colors.surface,
+                                child: Center(
+                                  child: Icon(Icons.movie, size: 64, color: colors.textMuted),
                                 ),
                               ),
                             ),
                           ),
                         ),
 
-                        // Atmospheric Celluloid Gradients (Vignette & Deep Bottom Shadow)
+                        // Atmospheric Gradients: top dark tint, bottom blend into background
                         Container(
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
-                                CinemaTokens.celluloidBlack.withValues(alpha: 0.3),
-                                CinemaTokens.celluloidBlack.withValues(alpha: 0.7),
-                                CinemaTokens.celluloidBlack,
+                                Colors.black.withValues(alpha: 0.35),
+                                Colors.black.withValues(alpha: 0.65),
+                                colors.bg,
                               ],
-                              stops: const [0.0, 0.55, 1.0],
+                              stops: const [0.0, 0.60, 1.0],
                             ),
                           ),
                         ),
@@ -187,7 +186,7 @@ class _HeroCarouselKenBurnsState extends State<HeroCarouselKenBurns>
                               radius: 1.1,
                               colors: [
                                 Colors.transparent,
-                                CinemaTokens.celluloidBlack.withValues(alpha: 0.65),
+                                Colors.black.withValues(alpha: 0.5),
                               ],
                             ),
                           ),
@@ -203,19 +202,19 @@ class _HeroCarouselKenBurnsState extends State<HeroCarouselKenBurns>
             Positioned(
               left: 0,
               right: 0,
-              bottom: 40,
+              bottom: isMobile ? 24 : 36,
               child: Center(
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: CinemaTokens.maxContentWidth),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: AnimatedBuilder(
                       animation: _titleRevealController,
                       builder: (context, _) {
                         final currentMovie = widget.movies[_currentIndex];
                         final revealProgress = isReduced ? 1.0 : _titleRevealController.value;
-                        final translateY = (1.0 - revealProgress) * 36.0;
-                        final letterSpacing = 2.0 + (1.0 - revealProgress) * 4.0;
+                        final translateY = (1.0 - revealProgress) * 30.0;
+                        final letterSpacing = 1.2 + (1.0 - revealProgress) * 2.0;
 
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -226,20 +225,20 @@ class _HeroCarouselKenBurnsState extends State<HeroCarouselKenBurns>
                               children: [
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                                  color: CinemaTokens.projectorAmber,
+                                  color: colors.accentAmber,
                                   child: Text(
                                     'NOW SHOWING',
-                                    style: CinemaText.monoBadge(color: CinemaTokens.celluloidBlack),
+                                    style: CinemaText.monoBadge(color: Colors.black),
                                   ),
                                 ),
-                                const SizedBox(width: 12),
+                                const SizedBox(width: 10),
                                 Text(
                                   '35MM PROJECTION • HALL A',
-                                  style: CinemaText.monoLabel(color: CinemaTokens.ash),
+                                  style: CinemaText.monoLabel(color: colors.isDark ? CinemaTokens.ash : Colors.white70),
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 10),
 
                             // Masked Slide-Up Movie Title
                             ClipRect(
@@ -251,14 +250,14 @@ class _HeroCarouselKenBurnsState extends State<HeroCarouselKenBurns>
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     fontFamily: CinemaTokens.fontDisplay,
-                                    fontSize: 48.0,
+                                    fontSize: titleFontSize,
                                     letterSpacing: letterSpacing,
-                                    height: 0.95,
-                                    color: CinemaTokens.bone,
+                                    height: 0.96,
+                                    color: Colors.white,
                                     shadows: const [
                                       Shadow(
-                                        color: Color(0xDD000000),
-                                        blurRadius: 8,
+                                        color: Color(0xCC000000),
+                                        blurRadius: 10,
                                         offset: Offset(0, 3),
                                       ),
                                     ],
@@ -266,34 +265,35 @@ class _HeroCarouselKenBurnsState extends State<HeroCarouselKenBurns>
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 8),
 
                             // Metadata row: Year, Runtime, Genres, Clapper rating
                             Wrap(
                               crossAxisAlignment: WrapCrossAlignment.center,
-                              spacing: 12,
-                              runSpacing: 8,
+                              spacing: 10,
+                              runSpacing: 6,
                               children: [
                                 Text('${currentMovie.year}', style: CinemaText.monoMeta(color: CinemaTokens.projectorAmber)),
-                                const Text('•', style: TextStyle(color: CinemaTokens.ash)),
-                                Text(currentMovie.formattedRuntime, style: CinemaText.monoMeta(color: CinemaTokens.bone)),
-                                const Text('•', style: TextStyle(color: CinemaTokens.ash)),
-                                ClapperRating(rating: currentMovie.rating, size: 16),
+                                const Text('•', style: TextStyle(color: Colors.white54)),
+                                Text(currentMovie.formattedRuntime, style: CinemaText.monoMeta(color: Colors.white)),
+                                const Text('•', style: TextStyle(color: Colors.white54)),
+                                ClapperRating(rating: currentMovie.rating, size: 15),
                                 for (final genre in currentMovie.genres.take(2))
                                   MonoTag(label: genre),
                               ],
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 16),
 
-                            // Action buttons
-                            Row(
+                            // Action buttons in a Wrap to never overflow
+                            Wrap(
+                              spacing: 12,
+                              runSpacing: 10,
                               children: [
                                 ElevatedButton.icon(
                                   onPressed: () => widget.onSelectMovie(currentMovie),
                                   icon: const Icon(Icons.confirmation_number_outlined, size: 18),
                                   label: const Text('EXPLORE FILM REEL'),
                                 ),
-                                const SizedBox(width: 16),
                                 OutlinedButton.icon(
                                   onPressed: () => widget.onSelectMovie(currentMovie),
                                   icon: const Icon(Icons.info_outline, size: 18),
@@ -318,16 +318,11 @@ class _HeroCarouselKenBurnsState extends State<HeroCarouselKenBurns>
               child: AnimatedBuilder(
                 animation: _progressController,
                 builder: (context, _) {
-                  return Column(
-                    children: [
-                      // Thin amber progress line for auto-advance
-                      LinearProgressIndicator(
-                        value: isReduced ? 0.0 : _progressController.value,
-                        backgroundColor: CinemaTokens.hairline.withValues(alpha: 0.4),
-                        valueColor: const AlwaysStoppedAnimation<Color>(CinemaTokens.projectorAmber),
-                        minHeight: 2.0,
-                      ),
-                    ],
+                  return LinearProgressIndicator(
+                    value: isReduced ? 0.0 : _progressController.value,
+                    backgroundColor: colors.borderHairline.withValues(alpha: 0.4),
+                    valueColor: AlwaysStoppedAnimation<Color>(colors.accentAmber),
+                    minHeight: 2.0,
                   );
                 },
               ),

@@ -1,6 +1,6 @@
 // ANIMATION: explicit (CustomPainter + single Ticker + RepaintBoundary + Particle Simulation)
 // ProjectorBeamParticles: Atmospheric light cone behind the hero with slow lamp flicker
-// and 60 floating dust motes drifting through the amber beam.
+// and lightweight floating dust motes drifting through the amber beam.
 
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
@@ -69,17 +69,16 @@ class _ProjectorBeamParticlesState extends State<ProjectorBeamParticles>
       duration: const Duration(seconds: 10),
     )..repeat();
 
-    _initParticles(50);
+    _initParticles(24);
 
     _tickerController.addListener(() {
       final now = DateTime.now();
       final dt = now.difference(_lastTime).inMilliseconds / 1000.0;
       _lastTime = now;
 
-      // Update particle positions
       final size = Size(1280, widget.height);
       for (final p in _particles) {
-        p.update(size, dt.clamp(0.0, 0.1));
+        p.update(size, dt.clamp(0.0, 0.05));
       }
     });
   }
@@ -91,10 +90,10 @@ class _ProjectorBeamParticlesState extends State<ProjectorBeamParticles>
         DustParticle(
           x: _rnd.nextDouble() * 1280,
           y: _rnd.nextDouble() * widget.height,
-          vx: (_rnd.nextDouble() - 0.4) * 14.0, // gentle rightward drift
-          vy: (_rnd.nextDouble() - 0.2) * 10.0, // gentle downward drift
-          radius: 1.0 + _rnd.nextDouble() * 2.0,
-          alpha: 0.2 + _rnd.nextDouble() * 0.5,
+          vx: (_rnd.nextDouble() - 0.4) * 12.0,
+          vy: (_rnd.nextDouble() - 0.2) * 8.0,
+          radius: 1.0 + _rnd.nextDouble() * 1.5,
+          alpha: 0.15 + _rnd.nextDouble() * 0.4,
           phase: _rnd.nextDouble() * 2 * math.pi,
         ),
       );
@@ -117,7 +116,7 @@ class _ProjectorBeamParticlesState extends State<ProjectorBeamParticles>
     }
 
     final isMobile = Responsive.isMobile(context);
-    final activeParticleCount = isMobile ? 25 : 55;
+    final count = isMobile ? 10 : 20;
 
     return RepaintBoundary(
       child: Stack(
@@ -129,13 +128,13 @@ class _ProjectorBeamParticlesState extends State<ProjectorBeamParticles>
                 animation: _tickerController,
                 builder: (context, _) {
                   final t = _tickerController.value * 2 * math.pi;
-                  // Low frequency noise on lamp opacity (lamp flicker)
-                  final flicker = 0.14 + (0.04 * math.sin(t * 3.0)) + (0.02 * math.cos(t * 7.5));
+                  final flicker = 0.12 + (0.03 * math.sin(t * 3.0)) + (0.015 * math.cos(t * 7.5));
 
                   return CustomPaint(
                     painter: BeamParticlesPainter(
-                      flickerAlpha: flicker.clamp(0.08, 0.22),
-                      particles: _particles.take(activeParticleCount).toList(),
+                      flickerAlpha: flicker.clamp(0.08, 0.18),
+                      particles: _particles,
+                      maxCount: count,
                     ),
                   );
                 },
@@ -152,17 +151,21 @@ class _ProjectorBeamParticlesState extends State<ProjectorBeamParticles>
 class BeamParticlesPainter extends CustomPainter {
   final double flickerAlpha;
   final List<DustParticle> particles;
+  final int maxCount;
 
   BeamParticlesPainter({
     required this.flickerAlpha,
     required this.particles,
+    required this.maxCount,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
+    if (size.width <= 0 || size.height <= 0) return;
+
     // 1. Draw Amber Projector Light Cone
     final Path beamPath = Path();
-    final apex = Offset(size.width * 0.72, 0); // Projector booth lens position
+    final apex = Offset(size.width * 0.72, 0);
     beamPath.moveTo(apex.dx - 40, apex.dy);
     beamPath.lineTo(size.width * 0.1, size.height);
     beamPath.lineTo(size.width * 0.95, size.height);
@@ -174,8 +177,8 @@ class BeamParticlesPainter extends CustomPainter {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-          CinemaTokens.projectorAmber.withValues(alpha: flickerAlpha * 1.5),
-          CinemaTokens.projectorAmber.withValues(alpha: flickerAlpha * 0.6),
+          CinemaTokens.projectorAmber.withValues(alpha: flickerAlpha * 1.4),
+          CinemaTokens.projectorAmber.withValues(alpha: flickerAlpha * 0.5),
           Colors.transparent,
         ],
         stops: const [0.0, 0.55, 1.0],
@@ -184,13 +187,14 @@ class BeamParticlesPainter extends CustomPainter {
 
     canvas.drawPath(beamPath, beamPaint);
 
-    // 2. Draw Illuminated Dust Motes drifting in the cone
+    // 2. Draw Illuminated Dust Motes
     final motePaint = Paint()..style = PaintingStyle.fill;
+    final limit = math.min(maxCount, particles.length);
 
-    for (final p in particles) {
-      // Glow pulse with particle phase
+    for (int i = 0; i < limit; i++) {
+      final p = particles[i];
       final pulse = (0.7 + 0.3 * math.sin(p.phase)).clamp(0.0, 1.0);
-      final currentAlpha = (p.alpha * pulse * flickerAlpha * 4.0).clamp(0.0, 0.85);
+      final currentAlpha = (p.alpha * pulse * flickerAlpha * 3.5).clamp(0.0, 0.75);
 
       motePaint.color = CinemaTokens.projectorAmber.withValues(alpha: currentAlpha);
       canvas.drawCircle(Offset(p.x % size.width, p.y % size.height), p.radius, motePaint);
@@ -199,6 +203,6 @@ class BeamParticlesPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant BeamParticlesPainter oldDelegate) {
-    return true; // Continuously repainting on ticker
+    return oldDelegate.flickerAlpha != flickerAlpha;
   }
 }

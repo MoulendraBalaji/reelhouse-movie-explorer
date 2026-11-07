@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../core/validators.dart';
 import '../theme/tokens.dart';
+import '../theme/app_theme.dart';
 import '../theme/text_styles.dart';
 import '../providers/auth_provider.dart';
 import '../widgets/motion/iris_shutter_transition.dart';
@@ -94,11 +95,14 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.cinemaColors;
+
     return Scaffold(
-      backgroundColor: CinemaTokens.celluloidBlack,
+      backgroundColor: colors.bg,
       appBar: AppBar(
+        backgroundColor: colors.bg,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: CinemaTokens.projectorAmber),
+          icon: Icon(Icons.arrow_back, color: colors.accentAmber),
           tooltip: 'Return to Cinema Home',
           onPressed: () {
             if (Navigator.of(context).canPop()) {
@@ -110,7 +114,12 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
         ),
         title: Text(
           _isSignUp ? 'PATRON SIGN-UP' : 'PROJECTION BOOTH LOGIN',
-          style: const TextStyle(fontFamily: CinemaTokens.fontDisplay, fontSize: 24, letterSpacing: 2),
+          style: TextStyle(
+            fontFamily: CinemaTokens.fontDisplay,
+            fontSize: 24,
+            letterSpacing: 2,
+            color: colors.textPrimary,
+          ),
         ),
       ),
       body: Center(
@@ -121,12 +130,12 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
             child: Container(
               padding: const EdgeInsets.all(32),
               decoration: BoxDecoration(
-                color: CinemaTokens.boothBrown,
-                border: Border.all(color: CinemaTokens.hairline),
+                color: colors.surface,
+                border: Border.all(color: colors.borderHairline),
                 borderRadius: CinemaTokens.borderSharp,
                 boxShadow: [
                   BoxShadow(
-                    color: CinemaTokens.projectorAmber.withValues(alpha: 0.15),
+                    color: colors.accentAmber.withValues(alpha: 0.12),
                     blurRadius: 20,
                   ),
                 ],
@@ -145,10 +154,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                         height: 56,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: CinemaTokens.projectorAmber, width: 2),
+                          border: Border.all(color: colors.accentAmber, width: 2),
                         ),
-                        child: const Center(
-                          child: Icon(Icons.movie_filter, size: 28, color: CinemaTokens.projectorAmber),
+                        child: Center(
+                          child: Icon(Icons.movie_filter, size: 28, color: colors.accentAmber),
                         ),
                       ),
                     ),
@@ -160,14 +169,14 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                           fontFamily: CinemaTokens.fontDisplay,
                           fontSize: 32,
                           letterSpacing: 3,
-                          color: CinemaTokens.bone,
+                          color: colors.textPrimary,
                         ),
                       ),
                     ),
                     Center(
                       child: Text(
                         _isSignUp ? 'REGISTER FOR SCREENING ADMISSION' : 'ENTER 35MM PROJECTION CONTROL',
-                        style: CinemaText.monoBadge(color: CinemaTokens.ash),
+                        style: CinemaText.monoBadge(color: colors.textMuted),
                       ),
                     ),
                     const SizedBox(height: 28),
@@ -177,10 +186,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                       TextFormField(
                         controller: _nameController,
                         validator: CinemaValidators.validateName,
-                        style: CinemaText.bodyMedium(color: CinemaTokens.bone),
-                        decoration: const InputDecoration(
+                        style: TextStyle(fontFamily: CinemaTokens.fontSerif, fontSize: 14, color: colors.textPrimary),
+                        decoration: InputDecoration(
                           labelText: 'Patron Full Name',
-                          prefixIcon: Icon(Icons.person_outline, color: CinemaTokens.ash),
+                          prefixIcon: Icon(Icons.person_outline, color: colors.textMuted),
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -191,10 +200,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                       controller: _emailController,
                       validator: CinemaValidators.validateEmail,
                       keyboardType: TextInputType.emailAddress,
-                      style: CinemaText.bodyMedium(color: CinemaTokens.bone),
-                      decoration: const InputDecoration(
+                      style: TextStyle(fontFamily: CinemaTokens.fontSerif, fontSize: 14, color: colors.textPrimary),
+                      decoration: InputDecoration(
                         labelText: 'Dispatch Email Address',
-                        prefixIcon: Icon(Icons.email_outlined, color: CinemaTokens.ash),
+                        prefixIcon: Icon(Icons.email_outlined, color: colors.textMuted),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -204,14 +213,14 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                       controller: _passwordController,
                       validator: CinemaValidators.validatePassword,
                       obscureText: _obscurePassword,
-                      style: CinemaText.bodyMedium(color: CinemaTokens.bone),
+                      style: TextStyle(fontFamily: CinemaTokens.fontSerif, fontSize: 14, color: colors.textPrimary),
                       decoration: InputDecoration(
                         labelText: 'Passcode (min 8 chars, 1 digit)',
-                        prefixIcon: const Icon(Icons.lock_outline, color: CinemaTokens.ash),
+                        prefixIcon: Icon(Icons.lock_outline, color: colors.textMuted),
                         suffixIcon: IconButton(
                           icon: Icon(
                             _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                            color: CinemaTokens.ash,
+                            color: colors.textMuted,
                           ),
                           onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
                         ),
@@ -228,10 +237,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                           _passwordController.text,
                         ),
                         obscureText: _obscurePassword,
-                        style: CinemaText.bodyMedium(color: CinemaTokens.bone),
-                        decoration: const InputDecoration(
+                        style: TextStyle(fontFamily: CinemaTokens.fontSerif, fontSize: 14, color: colors.textPrimary),
+                        decoration: InputDecoration(
                           labelText: 'Confirm Passcode',
-                          prefixIcon: Icon(Icons.lock_reset, color: CinemaTokens.ash),
+                          prefixIcon: Icon(Icons.lock_reset, color: colors.textMuted),
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -269,7 +278,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                       onPressed: () async {
                         final auth = context.read<AuthProvider>();
                         final nav = Navigator.of(context);
-                        await auth.login('moulendra@reelhouse.cinema', 'password123');
+                        await auth.login('archivist@reelhouse.cinema', 'password123');
                         if (mounted) {
                           nav.pushReplacementNamed('/home');
                         }

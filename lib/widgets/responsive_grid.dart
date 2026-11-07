@@ -30,6 +30,10 @@ class ResponsiveGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final columns = Responsive.getGridColumnCount(context);
+    final width = MediaQuery.of(context).size.width;
+    final effectiveRatio = childAspectRatio != 0.61
+        ? childAspectRatio
+        : (width < 600 ? 0.58 : (width < 1024 ? 0.62 : 0.64));
 
     return GridView.builder(
       padding: padding,
@@ -37,7 +41,7 @@ class ResponsiveGrid extends StatelessWidget {
       shrinkWrap: shrinkWrap,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: columns,
-        childAspectRatio: childAspectRatio,
+        childAspectRatio: effectiveRatio,
         crossAxisSpacing: crossAxisSpacing,
         mainAxisSpacing: mainAxisSpacing,
       ),

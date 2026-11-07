@@ -88,4 +88,13 @@ class CinemaValidators {
     }
     return null;
   }
+
+  /// Sanitizes text inputs by stripping potentially malicious HTML/script tags and control chars.
+  static String sanitizeInput(String? input) {
+    if (input == null) return '';
+    return input
+        .replaceAll(RegExp(r'<[^>]*>'), '') // Strip HTML tags
+        .replaceAll(RegExp(r'[\x00-\x08\x0B\x0C\x0E-\x1F]'), '') // Strip ASCII control chars
+        .trim();
+  }
 }

@@ -16,7 +16,7 @@ A vintage 35mm physical cinema themed Movie Explorer web application built with 
 
 ## Features & Highlights
 
-- **Cinema Visual Design**: Celluloid Black (`#0E0C0A`), Booth Brown (`#1A1611`), Projector Amber (`#FFB020`), Bone paper (`#F2E8D5`), and Ticket Red (`#D7263D`).
+- **Cinema Visual Design**: Celluloid Black (`#0C0A09`), Booth Charcoal (`#161310`), Projector Amber (`#F5A623`), Bone paper (`#F5EFE6`), and Ticket Crimson (`#E63946`). Matinee Light features Gallery Ivory (`#F8F6F1`), crisp Paper (`#FFFFFF`), and Deep Ink (`#181512`).
 - **Offline Typography**: Bundled TrueType fonts (`Bebas Neue`, `Fraunces`, `Space Mono`) with zero external CDN dependencies.
 - **Signature Motion System**: Hand-crafted kinematic widgets including Iris Shutter transitions, SMPTE Projector Countdown Leader, Ken Burns hero carousel, floating dust particles, 3D tilt poster cards, ticket tearing watchlist animation, clapperboard critique submission, and mechanical odometer counters.
 - **State Management**: Reactive state architecture with `Provider` (`MovieProvider`, `WatchlistProvider`, `SearchProvider`, `ThemeProvider`, `AuthProvider`, `ReviewsProvider`, `SettingsProvider`).

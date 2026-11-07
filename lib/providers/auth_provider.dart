@@ -9,8 +9,8 @@ class AuthProvider extends ChangeNotifier {
   final LocalStorageService _storage;
   bool _isLoggedIn = false;
   UserProfile _user = const UserProfile(
-    name: 'Moulendra Balaji',
-    email: 'moulendra@reelhouse.cinema',
+    name: 'Arthur Pendelton',
+    email: 'archivist@reelhouse.cinema',
     bio: 'Cinema projectionist & avid film 35mm archivist.',
     memberSince: '1974',
     favoriteGenre: 'Science Fiction',

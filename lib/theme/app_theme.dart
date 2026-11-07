@@ -82,9 +82,9 @@ class CinemaColors extends ThemeExtension<CinemaColors> {
   static const CinemaColors matinee = CinemaColors(
     bg: CinemaTokens.matineeBg,
     surface: CinemaTokens.matineeSurface,
-    surfaceElevated: Color(0xFFDDD2BA),
-    accentAmber: CinemaTokens.projectorAmber,
-    accentRed: CinemaTokens.ticketRed,
+    surfaceElevated: CinemaTokens.matineeSurfaceElevated,
+    accentAmber: CinemaTokens.matineeAmber,
+    accentRed: CinemaTokens.matineeRed,
     textPrimary: CinemaTokens.matineeInk,
     textMuted: CinemaTokens.matineeMuted,
     borderHairline: CinemaTokens.matineeHairline,
@@ -218,16 +218,16 @@ class CinemaTheme {
       scaffoldBackgroundColor: CinemaTokens.matineeBg,
       canvasColor: CinemaTokens.matineeSurface,
       cardColor: CinemaTokens.matineeSurface,
-      primaryColor: CinemaTokens.projectorAmber,
+      primaryColor: CinemaTokens.matineeAmber,
       colorScheme: const ColorScheme.light(
-        primary: CinemaTokens.projectorAmber,
-        secondary: CinemaTokens.ticketRed,
+        primary: CinemaTokens.matineeAmber,
+        secondary: CinemaTokens.matineeRed,
         surface: CinemaTokens.matineeSurface,
-        error: CinemaTokens.ticketRed,
-        onPrimary: CinemaTokens.celluloidBlack,
-        onSecondary: CinemaTokens.bone,
+        error: CinemaTokens.matineeRed,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
         onSurface: CinemaTokens.matineeInk,
-        onError: CinemaTokens.bone,
+        onError: Colors.white,
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: CinemaTokens.matineeBg,
@@ -251,13 +251,12 @@ class CinemaTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: CinemaTokens.projectorAmber,
-          foregroundColor: CinemaTokens.celluloidBlack,
+          backgroundColor: CinemaTokens.matineeAmber,
+          foregroundColor: Colors.white,
           elevation: 0,
-          textStyle: CinemaText.monoLabel(color: CinemaTokens.celluloidBlack),
+          textStyle: CinemaText.monoLabel(color: Colors.white),
           shape: const RoundedRectangleBorder(
             borderRadius: CinemaTokens.borderSharp,
-            side: CinemaTokens.borderSideAmber,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
         ),
@@ -275,8 +274,8 @@ class CinemaTheme {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: CinemaTokens.matineeInk,
-          textStyle: CinemaText.monoLabel(color: CinemaTokens.matineeInk),
+          foregroundColor: CinemaTokens.matineeAmber,
+          textStyle: CinemaText.monoLabel(color: CinemaTokens.matineeAmber),
         ),
       ),
       inputDecorationTheme: const InputDecorationTheme(
@@ -292,15 +291,15 @@ class CinemaTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: CinemaTokens.borderSharp,
-          borderSide: CinemaTokens.borderSideAmber,
+          borderSide: BorderSide(color: CinemaTokens.matineeAmber, width: CinemaTokens.borderWidth),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: CinemaTokens.borderSharp,
-          borderSide: CinemaTokens.borderSideRed,
+          borderSide: BorderSide(color: CinemaTokens.matineeRed, width: CinemaTokens.borderWidth),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: CinemaTokens.borderSharp,
-          borderSide: CinemaTokens.borderSideRed,
+          borderSide: BorderSide(color: CinemaTokens.matineeRed, width: CinemaTokens.borderWidth),
         ),
         labelStyle: TextStyle(color: CinemaTokens.matineeMuted, fontFamily: CinemaTokens.fontMono),
         hintStyle: TextStyle(color: CinemaTokens.matineeMuted, fontFamily: CinemaTokens.fontMono),
@@ -316,13 +315,13 @@ class CinemaTheme {
       tabBarTheme: const TabBarThemeData(
         labelColor: CinemaTokens.matineeInk,
         unselectedLabelColor: CinemaTokens.matineeMuted,
-        indicatorColor: CinemaTokens.projectorAmber,
+        indicatorColor: CinemaTokens.matineeAmber,
       ),
       sliderTheme: const SliderThemeData(
-        activeTrackColor: CinemaTokens.projectorAmber,
+        activeTrackColor: CinemaTokens.matineeAmber,
         inactiveTrackColor: CinemaTokens.matineeHairline,
-        thumbColor: CinemaTokens.projectorAmber,
-        overlayColor: Color(0x33FFB020),
+        thumbColor: CinemaTokens.matineeAmber,
+        overlayColor: Color(0x33D97706),
       ),
       extensions: const [CinemaColors.matinee],
     );

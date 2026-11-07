@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import '../../theme/tokens.dart';
+import '../../theme/app_theme.dart';
 import '../../theme/text_styles.dart';
 
 class MarqueeTicker extends StatefulWidget {
@@ -72,16 +73,18 @@ class _MarqueeTickerState extends State<MarqueeTicker>
     // Repeat items to ensure seamless endless ribbon
     final repeatedItems = [...widget.items, ...widget.items, ...widget.items, ...widget.items];
 
+    final colors = context.cinemaColors;
+
     return RepaintBoundary(
       child: MouseRegion(
         onEnter: (_) => setState(() => _isHovered = true),
         onExit: (_) => setState(() => _isHovered = false),
         child: Container(
           height: widget.height,
-          decoration: const BoxDecoration(
-            color: CinemaTokens.celluloidBlack,
+          decoration: BoxDecoration(
+            color: colors.surfaceElevated,
             border: Border.symmetric(
-              horizontal: CinemaTokens.borderSideDark,
+              horizontal: BorderSide(color: colors.borderHairline, width: 1.0),
             ),
           ),
           child: Row(
@@ -90,11 +93,11 @@ class _MarqueeTickerState extends State<MarqueeTicker>
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 height: double.infinity,
-                color: CinemaTokens.projectorAmber,
+                color: colors.accentAmber,
                 alignment: Alignment.center,
                 child: Text(
                   'DISPATCH',
-                  style: CinemaText.monoBadge(color: CinemaTokens.celluloidBlack),
+                  style: CinemaText.monoBadge(color: Colors.black),
                 ),
               ),
 
@@ -116,7 +119,7 @@ class _MarqueeTickerState extends State<MarqueeTicker>
                             fontFamily: CinemaTokens.fontDisplay,
                             fontSize: 16,
                             letterSpacing: 2.0,
-                            color: CinemaTokens.bone,
+                            color: colors.textPrimary,
                           ),
                         ),
                         Padding(
@@ -124,7 +127,7 @@ class _MarqueeTickerState extends State<MarqueeTicker>
                           child: Icon(
                             Icons.circle,
                             size: 4,
-                            color: CinemaTokens.projectorAmber.withValues(alpha: 0.8),
+                            color: colors.accentAmber.withValues(alpha: 0.8),
                           ),
                         ),
                       ],

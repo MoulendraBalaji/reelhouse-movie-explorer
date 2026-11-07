@@ -4,6 +4,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../theme/tokens.dart';
+import '../theme/app_theme.dart';
 import '../theme/motion.dart';
 import '../core/responsive.dart';
 
@@ -61,10 +62,13 @@ class _FilmGrainOverlayState extends State<FilmGrainOverlay>
               child: AnimatedBuilder(
                 animation: _grainController,
                 builder: (context, _) {
+                  final colors = context.cinemaColors;
                   return CustomPaint(
                     painter: GrainPainter(
                       opacity: widget.opacity,
                       seed: _rnd.nextDouble(),
+                      lightColor: colors.textPrimary,
+                      darkColor: colors.bg,
                     ),
                   );
                 },
@@ -80,16 +84,23 @@ class _FilmGrainOverlayState extends State<FilmGrainOverlay>
 class GrainPainter extends CustomPainter {
   final double opacity;
   final double seed;
+  final Color lightColor;
+  final Color darkColor;
 
-  GrainPainter({required this.opacity, required this.seed});
+  GrainPainter({
+    required this.opacity,
+    required this.seed,
+    this.lightColor = CinemaTokens.bone,
+    this.darkColor = CinemaTokens.celluloidBlack,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
     if (size.width == 0 || size.height == 0) return;
 
     final rnd = math.Random((seed * 10000).toInt());
-    final paintLight = Paint()..color = CinemaTokens.bone.withValues(alpha: opacity);
-    final paintDark = Paint()..color = CinemaTokens.celluloidBlack.withValues(alpha: opacity * 1.5);
+    final paintLight = Paint()..color = lightColor.withValues(alpha: opacity);
+    final paintDark = Paint()..color = darkColor.withValues(alpha: opacity * 1.5);
 
     // Render random noise speckles
     const speckleCount = 180;

@@ -5,23 +5,26 @@ import 'package:flutter/material.dart';
 class CinemaTokens {
   CinemaTokens._();
 
-  // Core Palette
-  static const Color celluloidBlack = Color(0xFF0E0C0A); // Background (Dark)
-  static const Color boothBrown = Color(0xFF1A1611);     // Surface / Card (Dark)
-  static const Color boothBrownElevated = Color(0xFF241F18); // Elevated surface
-  static const Color projectorAmber = Color(0xFFFFB020);  // Primary Accent / Glow
-  static const Color projectorAmberDim = Color(0x66FFB020);
-  static const Color ticketRed = Color(0xFFD7263D);        // Secondary / Favorites / Badges
-  static const Color bone = Color(0xFFF2E8D5);             // Text (Dark) / Background (Light)
-  static const Color ash = Color(0xFF8A8070);              // Muted Text
-  static const Color hairline = Color(0xFF3A332A);         // Hairline borders (Dark)
+  // Core Palette (Midnight / Dark)
+  static const Color celluloidBlack = Color(0xFF0C0A09); // Deep Celluloid Noir Background
+  static const Color boothBrown = Color(0xFF161310);     // Warm Booth Charcoal Surface
+  static const Color boothBrownElevated = Color(0xFF221C16); // Elevated Card Surface
+  static const Color projectorAmber = Color(0xFFF5A623);  // Warm Projector Gold Primary Accent
+  static const Color projectorAmberDim = Color(0x66F5A623);
+  static const Color ticketRed = Color(0xFFE63946);        // Cinema Crimson Secondary
+  static const Color bone = Color(0xFFF5EFE6);             // Crisp Bone White Text
+  static const Color ash = Color(0xFF9E9282);              // Warm Ash Muted Text
+  static const Color hairline = Color(0xFF2E271F);         // Subtle Framing Hairline Border
 
-  // Matinee (Light Mode) Palette
-  static const Color matineeBg = Color(0xFFF2E8D5);        // Warm paper bg
-  static const Color matineeSurface = Color(0xFFE8DEC8);   // Warm paper card
-  static const Color matineeInk = Color(0xFF1A1611);       // Dark ink text
-  static const Color matineeMuted = Color(0xFF6E6455);     // Muted ink
-  static const Color matineeHairline = Color(0xFFD1C4AD);  // Hairline borders (Light)
+  // Matinee (Light Mode) Palette - Archival Gallery Aesthetic
+  static const Color matineeBg = Color(0xFFF8F6F1);        // Warm Gallery Canvas Background
+  static const Color matineeSurface = Color(0xFFFFFFFF);   // Crisp Paper White Card Surface
+  static const Color matineeSurfaceElevated = Color(0xFFF0EAE1); // Warm Alabaster Card Detail
+  static const Color matineeAmber = Color(0xFFD97706);     // High-contrast Amber Ochre
+  static const Color matineeRed = Color(0xFFDC2626);       // Cinema Red for Light Mode
+  static const Color matineeInk = Color(0xFF181512);       // Deep Print Noir Text
+  static const Color matineeMuted = Color(0xFF6B6255);     // Slate Charcoal Muted Text
+  static const Color matineeHairline = Color(0xFFE2DACD);  // Delicate Paper Hairline Border
 
   // Typography Families
   static const String fontDisplay = 'Bebas Neue';

@@ -4,7 +4,7 @@
 
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import '../../theme/tokens.dart';
+import '../../theme/app_theme.dart';
 import '../../theme/motion.dart';
 import '../../theme/text_styles.dart';
 
@@ -66,11 +66,13 @@ class _OdometerCounterState extends State<OdometerCounter>
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.cinemaColors;
+
     if (CinemaMotion.isReducedMotion(context)) {
       final text = widget.value is int
           ? '${widget.value}${widget.suffix}'
           : '${widget.value.toStringAsFixed(1)}${widget.suffix}';
-      return Text(text, style: CinemaText.odometerNumber(size: widget.fontSize));
+      return Text(text, style: CinemaText.odometerNumber(color: colors.accentAmber, size: widget.fontSize));
     }
 
     return AnimatedBuilder(
@@ -83,7 +85,7 @@ class _OdometerCounterState extends State<OdometerCounter>
 
         return Text(
           formatted,
-          style: CinemaText.odometerNumber(size: widget.fontSize),
+          style: CinemaText.odometerNumber(color: colors.accentAmber, size: widget.fontSize),
         );
       },
     );
@@ -140,6 +142,7 @@ class _PaintedChartRevealState extends State<PaintedChartReveal>
   @override
   Widget build(BuildContext context) {
     final isReduced = CinemaMotion.isReducedMotion(context);
+    final colors = context.cinemaColors;
 
     return RepaintBoundary(
       child: Container(
@@ -153,6 +156,7 @@ class _PaintedChartRevealState extends State<PaintedChartReveal>
               painter: CinemaChartPainter(
                 points: widget.points,
                 progress: isReduced ? 1.0 : _drawProgress.value,
+                colors: colors,
               ),
             );
           },
@@ -165,8 +169,13 @@ class _PaintedChartRevealState extends State<PaintedChartReveal>
 class CinemaChartPainter extends CustomPainter {
   final List<ChartDataPoint> points;
   final double progress;
+  final CinemaColors colors;
 
-  CinemaChartPainter({required this.points, required this.progress});
+  CinemaChartPainter({
+    required this.points,
+    required this.progress,
+    required this.colors,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -181,7 +190,7 @@ class CinemaChartPainter extends CustomPainter {
 
     // Draw baseline hairline
     final baselinePaint = Paint()
-      ..color = CinemaTokens.hairline
+      ..color = colors.borderHairline
       ..strokeWidth = 1.0;
     canvas.drawLine(
       Offset(0, chartHeight),
@@ -206,8 +215,8 @@ class CinemaChartPainter extends CustomPainter {
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
           colors: [
-            CinemaTokens.boothBrown,
-            CinemaTokens.projectorAmber.withValues(alpha: 0.85),
+            colors.surfaceElevated,
+            colors.accentAmber.withValues(alpha: 0.85),
           ],
         ).createShader(rect)
         ..style = PaintingStyle.fill;
@@ -216,7 +225,7 @@ class CinemaChartPainter extends CustomPainter {
 
       // Hairline border around bar
       final borderPaint = Paint()
-        ..color = CinemaTokens.projectorAmber
+        ..color = colors.accentAmber
         ..style = PaintingStyle.stroke
         ..strokeWidth = 1.0;
       canvas.drawRect(rect, borderPaint);
@@ -225,7 +234,7 @@ class CinemaChartPainter extends CustomPainter {
       if (progress > 0.6) {
         textPainter.text = TextSpan(
           text: p.value.toInt().toString(),
-          style: CinemaText.monoBadge(color: CinemaTokens.bone),
+          style: CinemaText.monoBadge(color: colors.textPrimary),
         );
         textPainter.layout();
         textPainter.paint(
@@ -237,7 +246,7 @@ class CinemaChartPainter extends CustomPainter {
       // X-axis label
       textPainter.text = TextSpan(
         text: p.label,
-        style: CinemaText.monoLabel(color: CinemaTokens.ash),
+        style: CinemaText.monoLabel(color: colors.textMuted),
       );
       textPainter.layout();
       textPainter.paint(
@@ -249,6 +258,6 @@ class CinemaChartPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CinemaChartPainter oldDelegate) {
-    return oldDelegate.progress != progress;
+    return oldDelegate.progress != progress || oldDelegate.colors != colors;
   }
 }

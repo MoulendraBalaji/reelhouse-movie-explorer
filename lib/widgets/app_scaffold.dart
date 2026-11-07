@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../core/constants.dart';
 import '../theme/tokens.dart';
+import '../theme/app_theme.dart';
 import '../theme/text_styles.dart';
 import '../providers/theme_provider.dart';
 import '../providers/movie_provider.dart';
@@ -66,6 +67,7 @@ class AppScaffold extends StatelessWidget {
     final showAllTabs = width >= 1024.0;
     final showCompactTabs = width >= 820.0 && width < 1024.0;
     final isNarrow = width < 820.0;
+    final isMobile = width < 600.0;
 
     final movieProvider = context.watch<MovieProvider>();
     final authProvider = context.watch<AuthProvider>();
@@ -112,8 +114,8 @@ class AppScaffold extends StatelessWidget {
                           CinemaConstants.appName,
                           style: TextStyle(
                             fontFamily: CinemaTokens.fontDisplay,
-                            fontSize: 24,
-                            letterSpacing: 2.5,
+                            fontSize: isMobile ? 20 : 24,
+                            letterSpacing: isMobile ? 1.5 : 2.5,
                             color: isDark ? CinemaTokens.bone : CinemaTokens.matineeInk,
                           ),
                         ),
@@ -188,8 +190,8 @@ class AppScaffold extends StatelessWidget {
                   const SizedBox(width: 8),
                 ],
 
-                // Narrow Screen Quick Search Icon (< 820px)
-                if (isNarrow)
+                // Narrow Screen Quick Search Icon (tablet range 600px - 819px; mobile has search in bottom bar)
+                if (isNarrow && !isMobile)
                   IconButton(
                     icon: const Icon(Icons.search, color: CinemaTokens.projectorAmber),
                     tooltip: 'Search Reels',
@@ -197,8 +199,8 @@ class AppScaffold extends StatelessWidget {
                   ),
 
                 // Lamp Theme Switch (Midnight <-> Matinee)
-                const LampThemeSwitch(),
-                const SizedBox(width: 6),
+                LampThemeSwitch(compact: isMobile),
+                SizedBox(width: isMobile ? 2 : 6),
 
                 // Patron Auth Icon
                 IconButton(
@@ -215,19 +217,19 @@ class AppScaffold extends StatelessWidget {
                     }
                   },
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: isMobile ? 4 : 8),
               ],
             )
           : null,
 
       // Mobile Navigation Drawer (< 820px)
-      drawer: isNarrow ? _buildCinemaDrawer(context, isDark, currentNavIndex) : null,
+      drawer: isNarrow ? _buildCinemaDrawer(context, currentNavIndex) : null,
 
       // Main Clean Body
       body: Column(
         children: [
           Expanded(child: body),
-          if (showFooter) _buildFooter(context, isDark),
+          if (showFooter) _buildFooter(context),
         ],
       ),
 
@@ -236,12 +238,12 @@ class AppScaffold extends StatelessWidget {
           ? BottomNavigationBar(
               currentIndex: currentNavIndex.clamp(0, 4),
               onTap: (idx) => _navigateToIndex(context, idx),
-              backgroundColor: isDark ? CinemaTokens.celluloidBlack : CinemaTokens.matineeBg,
-              selectedItemColor: CinemaTokens.projectorAmber,
-              unselectedItemColor: CinemaTokens.ash,
+              backgroundColor: context.cinemaColors.surface,
+              selectedItemColor: context.cinemaColors.accentAmber,
+              unselectedItemColor: context.cinemaColors.textMuted,
               type: BottomNavigationBarType.fixed,
-              selectedLabelStyle: CinemaText.monoBadge(color: CinemaTokens.projectorAmber),
-              unselectedLabelStyle: CinemaText.monoBadge(color: CinemaTokens.ash),
+              selectedLabelStyle: TextStyle(fontFamily: CinemaTokens.fontMono, fontSize: 10, fontWeight: FontWeight.w700),
+              unselectedLabelStyle: TextStyle(fontFamily: CinemaTokens.fontMono, fontSize: 10),
               items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.theaters_outlined), label: 'HOME'),
                 BottomNavigationBarItem(icon: Icon(Icons.grid_view), label: 'EXPLORE'),
@@ -254,17 +256,19 @@ class AppScaffold extends StatelessWidget {
     );
   }
 
-  Widget _buildCinemaDrawer(BuildContext context, bool isDark, int activeIndex) {
+  Widget _buildCinemaDrawer(BuildContext context, int activeIndex) {
+    final colors = context.cinemaColors;
+
     return Drawer(
-      backgroundColor: isDark ? CinemaTokens.boothBrown : CinemaTokens.matineeSurface,
+      backgroundColor: colors.surface,
       child: SafeArea(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: isDark ? CinemaTokens.celluloidBlack : CinemaTokens.matineeBg,
-                border: Border(bottom: BorderSide(color: isDark ? CinemaTokens.hairline : CinemaTokens.matineeHairline)),
+                color: colors.bg,
+                border: Border(bottom: BorderSide(color: colors.borderHairline)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -277,10 +281,10 @@ class AppScaffold extends StatelessWidget {
                         height: 36,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: CinemaTokens.projectorAmber, width: 2),
+                          border: Border.all(color: colors.accentAmber, width: 2),
                         ),
-                        child: const Center(
-                          child: Icon(Icons.movie_filter, color: CinemaTokens.projectorAmber, size: 20),
+                        child: Center(
+                          child: Icon(Icons.movie_filter, color: colors.accentAmber, size: 20),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -290,7 +294,7 @@ class AppScaffold extends StatelessWidget {
                           fontFamily: CinemaTokens.fontDisplay,
                           fontSize: 28,
                           letterSpacing: 2,
-                          color: isDark ? CinemaTokens.bone : CinemaTokens.matineeInk,
+                          color: colors.textPrimary,
                         ),
                       ),
                     ],
@@ -298,7 +302,7 @@ class AppScaffold extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     CinemaConstants.appTagline.toUpperCase(),
-                    style: CinemaText.monoBadge(color: CinemaTokens.ash),
+                    style: CinemaText.monoBadge(color: colors.textMuted),
                   ),
                 ],
               ),
@@ -363,11 +367,13 @@ class AppScaffold extends StatelessWidget {
     );
   }
 
-  Widget _buildFooter(BuildContext context, bool isDark) {
+  Widget _buildFooter(BuildContext context) {
+    final colors = context.cinemaColors;
+
     return Container(
       decoration: BoxDecoration(
-        color: isDark ? CinemaTokens.celluloidBlack : CinemaTokens.matineeBg,
-        border: Border(top: BorderSide(color: isDark ? CinemaTokens.hairline : CinemaTokens.matineeHairline)),
+        color: colors.bg,
+        border: Border(top: BorderSide(color: colors.borderHairline)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Center(
@@ -379,7 +385,7 @@ class AppScaffold extends StatelessWidget {
               Flexible(
                 child: Text(
                   'REELHOUSE • EST. 1934 • 35MM CINEMA EXPERIENCE',
-                  style: CinemaText.monoLabel(color: CinemaTokens.ash),
+                  style: CinemaText.monoLabel(color: colors.textMuted),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -387,7 +393,7 @@ class AppScaffold extends StatelessWidget {
               Flexible(
                 child: Text(
                   'Film data provided by TMDB. Offline reel fallback active.',
-                  style: CinemaText.monoBadge(color: CinemaTokens.ash),
+                  style: CinemaText.monoBadge(color: colors.textMuted),
                   textAlign: TextAlign.right,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -416,7 +422,7 @@ class _NavLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isSelected = index == currentIndex;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final colors = context.cinemaColors;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2.0),
@@ -436,16 +442,14 @@ class _NavLink extends StatelessWidget {
                   fontSize: 11,
                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                   letterSpacing: 1.1,
-                  color: isSelected
-                      ? CinemaTokens.projectorAmber
-                      : (isDark ? CinemaTokens.bone : CinemaTokens.matineeInk),
+                  color: isSelected ? colors.accentAmber : colors.textPrimary,
                 ),
               ),
               const SizedBox(height: 4),
               Container(
                 height: 2,
                 width: isSelected ? 24 : 0,
-                color: isSelected ? CinemaTokens.projectorAmber : Colors.transparent,
+                color: isSelected ? colors.accentAmber : Colors.transparent,
               ),
             ],
           ),
@@ -470,18 +474,20 @@ class _DrawerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.cinemaColors;
+
     return ListTile(
-      leading: Icon(icon, color: isSelected ? CinemaTokens.projectorAmber : CinemaTokens.ash),
+      leading: Icon(icon, color: isSelected ? colors.accentAmber : colors.textMuted),
       title: Text(
         title,
         style: TextStyle(
           fontFamily: CinemaTokens.fontMono,
           fontSize: 13,
           fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-          color: isSelected ? CinemaTokens.projectorAmber : CinemaTokens.bone,
+          color: isSelected ? colors.accentAmber : colors.textPrimary,
         ),
       ),
-      tileColor: isSelected ? CinemaTokens.celluloidBlack : null,
+      tileColor: isSelected ? colors.surfaceElevated : null,
       onTap: onTap,
     );
   }

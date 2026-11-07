@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import '../theme/tokens.dart';
+import '../theme/app_theme.dart';
 import '../theme/text_styles.dart';
 import '../models/movie.dart';
 import 'clapper_rating.dart';
@@ -56,19 +57,21 @@ class TicketStubClipper extends CustomClipper<Path> {
 class TicketStubCard extends StatelessWidget {
   final Movie movie;
   final VoidCallback? onTap;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
 
   const TicketStubCard({
     super.key,
     required this.movie,
     this.onTap,
-    this.width = 220.0,
-    this.height = 360.0,
+    this.width,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.cinemaColors;
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -80,8 +83,8 @@ class TicketStubCard extends StatelessWidget {
             width: width,
             height: height,
             decoration: BoxDecoration(
-              color: CinemaTokens.boothBrown,
-              border: Border.all(color: CinemaTokens.hairline, width: 1.0),
+              color: colors.surface,
+              border: Border.all(color: colors.borderHairline, width: 1.0),
               borderRadius: CinemaTokens.borderSharp,
             ),
             child: Column(
@@ -98,103 +101,125 @@ class TicketStubCard extends StatelessWidget {
                         title: movie.title,
                         fit: BoxFit.cover,
                       ),
-                  // Rating badge overlay on poster top right
-                  Positioned(
-                    top: 8,
-                    right: 8,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: CinemaTokens.celluloidBlack.withValues(alpha: 0.85),
-                        border: Border.all(color: CinemaTokens.projectorAmber, width: 1),
-                        borderRadius: CinemaTokens.borderSharp,
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.star, size: 11, color: CinemaTokens.projectorAmber),
-                          const SizedBox(width: 4),
-                          Text(
-                            movie.rating.toStringAsFixed(1),
-                            style: CinemaText.monoBadge(color: CinemaTokens.projectorAmber),
+                      // Rating badge overlay on poster top right
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withValues(alpha: 0.75),
+                            border: Border.all(color: CinemaTokens.projectorAmber, width: 1),
+                            borderRadius: CinemaTokens.borderSharp,
                           ),
-                        ],
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.star, size: 11, color: CinemaTokens.projectorAmber),
+                              const SizedBox(width: 4),
+                              Text(
+                                movie.rating.toStringAsFixed(1),
+                                style: CinemaText.monoBadge(color: CinemaTokens.projectorAmber),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
+                    ],
+                  ),
+                ),
+
+                // Perforated Dashed Tear Line
+                SizedBox(
+                  height: 1,
+                  child: CustomPaint(
+                    painter: HorizontalDashedLinePainter(color: colors.borderHairline),
+                  ),
+                ),
+
+                // Ticket Stub Bottom Details
+                Expanded(
+                  flex: 32,
+                  child: Container(
+                    color: colors.surfaceElevated,
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        // Title
+                        Text(
+                          movie.title.toUpperCase(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontFamily: CinemaTokens.fontDisplay,
+                            fontSize: 15,
+                            letterSpacing: 0.8,
+                            color: colors.textPrimary,
+                          ),
+                        ),
+
+                        // Metadata row: Year & Runtime
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${movie.year}',
+                              style: TextStyle(
+                                fontFamily: CinemaTokens.fontMono,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                color: colors.accentAmber,
+                              ),
+                            ),
+                            Text(
+                              movie.formattedRuntime,
+                              style: TextStyle(
+                                fontFamily: CinemaTokens.fontMono,
+                                fontSize: 11,
+                                color: colors.textMuted,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        // Genre tag & Clapper
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            if (movie.genres.isNotEmpty)
+                              Flexible(
+                                child: MonoTag(label: movie.genres.first, isSmall: true),
+                              )
+                            else
+                              const SizedBox.shrink(),
+                            const SizedBox(width: 4),
+                            ClapperRating(rating: movie.rating, size: 12),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-
-            // Perforated Dashed Tear Line
-            SizedBox(
-              height: 1,
-              child: CustomPaint(
-                painter: HorizontalDashedLinePainter(),
-              ),
-            ),
-
-            // Ticket Stub Bottom Details
-            Expanded(
-              flex: 32,
-              child: Container(
-                color: CinemaTokens.boothBrownElevated,
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Title
-                    Text(
-                      movie.title.toUpperCase(),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontFamily: CinemaTokens.fontDisplay,
-                        fontSize: 16,
-                        letterSpacing: 1.0,
-                        color: CinemaTokens.bone,
-                      ),
-                    ),
-
-                    // Metadata row: Year & Runtime
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('${movie.year}', style: CinemaText.monoMeta(color: CinemaTokens.projectorAmber)),
-                        Text(movie.formattedRuntime, style: CinemaText.monoMeta(color: CinemaTokens.ash)),
-                      ],
-                    ),
-
-                    // Genre tag & Clapper
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        if (movie.genres.isNotEmpty)
-                          MonoTag(label: movie.genres.first, isSmall: true)
-                        else
-                          const SizedBox.shrink(),
-                        ClapperRating(rating: movie.rating, size: 12),
-                      ],
-                    ),
-                  ],
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
-    ),
-  ),
-);
-}
+    );
+  }
 }
 
 class HorizontalDashedLinePainter extends CustomPainter {
+  final Color color;
+
+  HorizontalDashedLinePainter({this.color = CinemaTokens.hairline});
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = CinemaTokens.hairline
+      ..color = color
       ..strokeWidth = 1.0;
 
     const dashWidth = 4.0;
@@ -208,5 +233,6 @@ class HorizontalDashedLinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant HorizontalDashedLinePainter oldDelegate) =>
+      oldDelegate.color != color;
 }

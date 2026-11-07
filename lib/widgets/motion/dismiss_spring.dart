@@ -4,6 +4,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../theme/tokens.dart';
+import '../../theme/app_theme.dart';
 import '../../theme/text_styles.dart';
 
 class DismissSpring extends StatelessWidget {
@@ -22,6 +23,8 @@ class DismissSpring extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.cinemaColors;
+
     return Dismissible(
       key: itemKey,
       direction: DismissDirection.endToStart,
@@ -30,7 +33,7 @@ class DismissSpring extends StatelessWidget {
         ScaffoldMessenger.of(context).clearSnackBars();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            backgroundColor: CinemaTokens.boothBrown,
+            backgroundColor: colors.surfaceElevated,
             behavior: SnackBarBehavior.floating,
             shape: const RoundedRectangleBorder(
               borderRadius: CinemaTokens.borderSharp,
@@ -40,13 +43,13 @@ class DismissSpring extends StatelessWidget {
               children: [
                 const Icon(Icons.delete_outline, size: 18, color: CinemaTokens.ticketRed),
                 const SizedBox(width: 12),
-                Text('FILM REEL REMOVED FROM VAULT', style: CinemaText.monoLabel(color: CinemaTokens.bone)),
+                Text('FILM REEL REMOVED FROM VAULT', style: CinemaText.monoLabel(color: colors.textPrimary)),
               ],
             ),
             action: onUndo != null
                 ? SnackBarAction(
                     label: 'RESTORE',
-                    textColor: CinemaTokens.projectorAmber,
+                    textColor: colors.accentAmber,
                     onPressed: onUndo!,
                   )
                 : null,

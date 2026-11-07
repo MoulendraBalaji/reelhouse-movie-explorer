@@ -9,7 +9,8 @@ import '../../theme/motion.dart';
 import '../../providers/theme_provider.dart';
 
 class LampThemeSwitch extends StatefulWidget {
-  const LampThemeSwitch({super.key});
+  final bool compact;
+  const LampThemeSwitch({super.key, this.compact = false});
 
   @override
   State<LampThemeSwitch> createState() => _LampThemeSwitchState();
@@ -68,7 +69,10 @@ class _LampThemeSwitchState extends State<LampThemeSwitch>
             onTap: _onToggle,
             borderRadius: BorderRadius.circular(4),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              padding: EdgeInsets.symmetric(
+                horizontal: widget.compact ? 6 : 10,
+                vertical: 6,
+              ),
               decoration: BoxDecoration(
                 color: isDark ? CinemaTokens.boothBrown : CinemaTokens.matineeSurface,
                 border: Border.all(
@@ -92,17 +96,19 @@ class _LampThemeSwitchState extends State<LampThemeSwitch>
                       ),
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    isDark ? 'MIDNIGHT' : 'MATINEE',
-                    style: TextStyle(
-                      fontFamily: CinemaTokens.fontMono,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 1.2,
-                      color: isDark ? CinemaTokens.bone : CinemaTokens.matineeInk,
+                  if (!widget.compact) ...[
+                    const SizedBox(width: 8),
+                    Text(
+                      isDark ? 'MIDNIGHT' : 'MATINEE',
+                      style: TextStyle(
+                        fontFamily: CinemaTokens.fontMono,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1.2,
+                        color: isDark ? CinemaTokens.bone : CinemaTokens.matineeInk,
+                      ),
                     ),
-                  ),
+                  ],
                 ],
               ),
             ),

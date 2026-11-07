@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../core/responsive.dart';
 import '../core/validators.dart';
 import '../theme/tokens.dart';
+import '../theme/app_theme.dart';
 import '../theme/text_styles.dart';
 import '../providers/auth_provider.dart';
 import '../providers/settings_provider.dart';
@@ -50,16 +51,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (_profileFormKey.currentState?.validate() ?? false) {
       final auth = context.read<AuthProvider>();
       auth.updateProfile(
-        name: _nameController.text.trim(),
+        name: CinemaValidators.sanitizeInput(_nameController.text),
         email: auth.user.email,
-        bio: _bioController.text.trim(),
+        bio: CinemaValidators.sanitizeInput(_bioController.text),
         favoriteGenre: _selectedGenre,
       );
       setState(() => _isEditing = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          backgroundColor: CinemaTokens.boothBrown,
-          content: Text('PATRON CREDENTIALS UPDATED', style: CinemaText.monoBadge(color: CinemaTokens.projectorAmber)),
+          backgroundColor: context.cinemaColors.surfaceElevated,
+          content: Text('PATRON CREDENTIALS UPDATED', style: CinemaText.monoBadge(color: context.cinemaColors.accentAmber)),
         ),
       );
     }
@@ -69,6 +70,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
     final settingsProvider = context.watch<SettingsProvider>();
+    final colors = context.cinemaColors;
+    final isMobile = Responsive.isMobile(context);
     final user = authProvider.user;
 
     final chartPoints = [
@@ -96,67 +99,120 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 24),
 
-                  // Patron Identity Card
+                  // Patron Identity Card (Adaptive layout on mobile)
                   Container(
-                    padding: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: CinemaTokens.boothBrown,
-                      border: Border.all(color: CinemaTokens.hairline),
+                      color: colors.surface,
+                      border: Border.all(color: colors.borderHairline),
                       borderRadius: CinemaTokens.borderSharp,
                     ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Avatar film reel
-                        Container(
-                          width: 68,
-                          height: 68,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: CinemaTokens.projectorAmber, width: 2),
-                            shape: BoxShape.circle,
-                            color: CinemaTokens.celluloidBlack,
-                          ),
-                          child: const Center(
-                            child: Icon(Icons.person, size: 36, color: CinemaTokens.projectorAmber),
-                          ),
-                        ),
-                        const SizedBox(width: 20),
-
-                        // Name, Email, Bio
-                        Expanded(
-                          child: Column(
+                    child: isMobile
+                        ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    user.name.toUpperCase(),
-                                    style: TextStyle(
-                                      fontFamily: CinemaTokens.fontDisplay,
-                                      fontSize: 28,
-                                      letterSpacing: 2,
-                                      color: CinemaTokens.bone,
+                                  Container(
+                                    width: 56,
+                                    height: 56,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: colors.accentAmber, width: 2),
+                                      shape: BoxShape.circle,
+                                      color: colors.surfaceElevated,
+                                    ),
+                                    child: Center(
+                                      child: Icon(Icons.person, size: 30, color: colors.accentAmber),
                                     ),
                                   ),
-                                  OutlinedButton.icon(
-                                    onPressed: () => setState(() => _isEditing = !_isEditing),
-                                    icon: Icon(_isEditing ? Icons.close : Icons.edit, size: 14),
-                                    label: Text(_isEditing ? 'CANCEL' : 'EDIT CREDENTIALS'),
+                                  const SizedBox(width: 14),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          user.name.toUpperCase(),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontFamily: CinemaTokens.fontDisplay,
+                                            fontSize: 24,
+                                            letterSpacing: 1.5,
+                                            color: colors.textPrimary,
+                                          ),
+                                        ),
+                                        Text(user.email, style: CinemaText.monoMeta(color: colors.accentAmber)),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 4),
-                              Text(user.email, style: CinemaText.monoMeta(color: CinemaTokens.projectorAmber)),
+                              const SizedBox(height: 12),
+                              Text(user.bio, style: CinemaText.bodyMedium(color: colors.textMuted)),
                               const SizedBox(height: 8),
-                              Text(user.bio, style: CinemaText.bodyMedium(color: CinemaTokens.ash)),
-                              const SizedBox(height: 8),
-                              Text('DISPATCH PATRON SINCE: ${user.memberSince}', style: CinemaText.monoBadge(color: CinemaTokens.ash)),
+                              Text('DISPATCH PATRON SINCE: ${user.memberSince}', style: CinemaText.monoBadge(color: colors.textMuted)),
+                              const SizedBox(height: 14),
+                              OutlinedButton.icon(
+                                onPressed: () => setState(() => _isEditing = !_isEditing),
+                                icon: Icon(_isEditing ? Icons.close : Icons.edit, size: 14),
+                                label: Text(_isEditing ? 'CANCEL' : 'EDIT CREDENTIALS'),
+                              ),
+                            ],
+                          )
+                        : Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 68,
+                                height: 68,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: colors.accentAmber, width: 2),
+                                  shape: BoxShape.circle,
+                                  color: colors.surfaceElevated,
+                                ),
+                                child: Center(
+                                  child: Icon(Icons.person, size: 36, color: colors.accentAmber),
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            user.name.toUpperCase(),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontFamily: CinemaTokens.fontDisplay,
+                                              fontSize: 28,
+                                              letterSpacing: 2,
+                                              color: colors.textPrimary,
+                                            ),
+                                          ),
+                                        ),
+                                        OutlinedButton.icon(
+                                          onPressed: () => setState(() => _isEditing = !_isEditing),
+                                          icon: Icon(_isEditing ? Icons.close : Icons.edit, size: 14),
+                                          label: Text(_isEditing ? 'CANCEL' : 'EDIT CREDENTIALS'),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(user.email, style: CinemaText.monoMeta(color: colors.accentAmber)),
+                                    const SizedBox(height: 8),
+                                    Text(user.bio, style: CinemaText.bodyMedium(color: colors.textMuted)),
+                                    const SizedBox(height: 8),
+                                    Text('DISPATCH PATRON SINCE: ${user.memberSince}', style: CinemaText.monoBadge(color: colors.textMuted)),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
                   ),
 
                   // Edit Profile Form
@@ -165,8 +221,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: CinemaTokens.boothBrownElevated,
-                        border: Border.all(color: CinemaTokens.projectorAmber),
+                        color: colors.surfaceElevated,
+                        border: Border.all(color: colors.accentAmber),
                         borderRadius: CinemaTokens.borderSharp,
                       ),
                       child: Form(
@@ -174,18 +230,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('MODIFY PATRON DOSSIER', style: CinemaText.monoLabel(color: CinemaTokens.projectorAmber)),
+                            Text('MODIFY PATRON DOSSIER', style: CinemaText.monoLabel(color: colors.accentAmber)),
                             const SizedBox(height: 16),
                             TextFormField(
                               controller: _nameController,
                               validator: CinemaValidators.validateName,
-                              style: CinemaText.bodyMedium(color: CinemaTokens.bone),
+                              style: TextStyle(fontFamily: CinemaTokens.fontSerif, fontSize: 14, color: colors.textPrimary),
                               decoration: const InputDecoration(labelText: 'Patron Full Name'),
                             ),
                             const SizedBox(height: 14),
                             TextFormField(
                               controller: _bioController,
-                              style: CinemaText.bodyMedium(color: CinemaTokens.bone),
+                              style: TextStyle(fontFamily: CinemaTokens.fontSerif, fontSize: 14, color: colors.textPrimary),
                               decoration: const InputDecoration(labelText: 'Cinema Bio / Archival Role'),
                             ),
                             const SizedBox(height: 16),
@@ -208,7 +264,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       fontFamily: CinemaTokens.fontDisplay,
                       fontSize: 24,
                       letterSpacing: 2,
-                      color: CinemaTokens.projectorAmber,
+                      color: colors.accentAmber,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -218,24 +274,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     runSpacing: 16,
                     children: [
                       _buildMetricCard(
+                        context: context,
                         title: 'FILMS SCREENED',
                         valueWidget: OdometerCounter(value: user.watchedCount),
                         subtitle: 'Spools viewed in full',
                       ),
                       _buildMetricCard(
+                        context: context,
                         title: 'PROJECTION RUNTIME',
                         valueWidget: OdometerCounter(value: user.totalHours, suffix: 'h'),
                         subtitle: 'Hours in theater darkness',
                       ),
                       _buildMetricCard(
+                        context: context,
                         title: 'FAVORITE GENRE',
                         valueWidget: Text(
                           user.favoriteGenre.toUpperCase(),
                           style: TextStyle(
                             fontFamily: CinemaTokens.fontDisplay,
-                            fontSize: 28,
+                            fontSize: 26,
                             letterSpacing: 2,
-                            color: CinemaTokens.projectorAmber,
+                            color: colors.accentAmber,
                           ),
                         ),
                         subtitle: 'Primary aesthetic affinity',
@@ -252,7 +311,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       fontFamily: CinemaTokens.fontDisplay,
                       fontSize: 24,
                       letterSpacing: 2,
-                      color: CinemaTokens.projectorAmber,
+                      color: colors.accentAmber,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -260,14 +319,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: CinemaTokens.boothBrown,
-                      border: Border.all(color: CinemaTokens.hairline),
+                      color: colors.surface,
+                      border: Border.all(color: colors.borderHairline),
                       borderRadius: CinemaTokens.borderSharp,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('FREQUENCY OF 35MM REELS UNSPOLLED', style: CinemaText.monoBadge(color: CinemaTokens.ash)),
+                        Text('FREQUENCY OF 35MM REELS UNSPOOLED', style: CinemaText.monoBadge(color: colors.textMuted)),
                         const SizedBox(height: 16),
                         PaintedChartReveal(points: chartPoints, height: 180),
                       ],
@@ -280,27 +339,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: CinemaTokens.boothBrown,
-                      border: Border.all(color: CinemaTokens.hairline),
+                      color: colors.surface,
+                      border: Border.all(color: colors.borderHairline),
                       borderRadius: CinemaTokens.borderSharp,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('PROJECTION BOOTH PREFERENCES', style: CinemaText.monoLabel(color: CinemaTokens.projectorAmber)),
+                        Text('PROJECTION BOOTH PREFERENCES', style: CinemaText.monoLabel(color: colors.accentAmber)),
                         const SizedBox(height: 16),
 
                         // Reduce Motion Switch
                         SwitchListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: Text('Reduce Motion / High-Frequency Flicker', style: CinemaText.monoMeta(color: CinemaTokens.bone)),
-                          subtitle: Text('Replaces mechanical animations with simple opacity dissolves for comfortable viewing.', style: CinemaText.bodySmall(color: CinemaTokens.ash)),
+                          title: Text('Reduce Motion / High-Frequency Flicker', style: CinemaText.monoMeta(color: colors.textPrimary)),
+                          subtitle: Text('Replaces mechanical animations with simple opacity dissolves for comfortable viewing.', style: CinemaText.bodySmall(color: colors.textMuted)),
                           value: settingsProvider.reduceMotion,
-                          activeThumbColor: CinemaTokens.projectorAmber,
+                          activeThumbColor: colors.accentAmber,
                           onChanged: (val) => settingsProvider.setReduceMotion(val),
                         ),
 
-                        const Divider(color: CinemaTokens.hairline, height: 24),
+                        Divider(color: colors.borderHairline, height: 24),
 
                         // Sign Out Button
                         if (authProvider.isLoggedIn)
@@ -309,8 +368,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               authProvider.logout();
                               Navigator.of(context).pushReplacementNamed('/home');
                             },
-                            icon: const Icon(Icons.logout, size: 16, color: CinemaTokens.ticketRed),
-                            label: Text('SIGN OUT OF PROJECTION BOOTH', style: CinemaText.monoLabel(color: CinemaTokens.ticketRed)),
+                            icon: Icon(Icons.logout, size: 16, color: colors.accentRed),
+                            label: Text('SIGN OUT OF PROJECTION BOOTH', style: CinemaText.monoLabel(color: colors.accentRed)),
                           )
                         else
                           ElevatedButton.icon(
@@ -333,26 +392,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildMetricCard({
+    required BuildContext context,
     required String title,
     required Widget valueWidget,
     required String subtitle,
   }) {
+    final colors = context.cinemaColors;
+    final isMobile = Responsive.isMobile(context);
+
     return Container(
-      width: 260,
+      width: isMobile ? double.infinity : 240,
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: CinemaTokens.boothBrown,
-        border: Border.all(color: CinemaTokens.hairline),
+        color: colors.surface,
+        border: Border.all(color: colors.borderHairline),
         borderRadius: CinemaTokens.borderSharp,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: CinemaText.monoBadge(color: CinemaTokens.ash)),
+          Text(title, style: CinemaText.monoBadge(color: colors.textMuted)),
           const SizedBox(height: 8),
           valueWidget,
           const SizedBox(height: 6),
-          Text(subtitle, style: CinemaText.bodySmall(color: CinemaTokens.ash)),
+          Text(subtitle, style: CinemaText.bodySmall(color: colors.textMuted)),
         ],
       ),
     );

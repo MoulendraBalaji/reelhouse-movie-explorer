@@ -4,6 +4,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../theme/tokens.dart';
+import '../../theme/app_theme.dart';
 import '../../theme/motion.dart';
 import '../../theme/text_styles.dart';
 
@@ -121,13 +122,14 @@ class _TicketTearAnimationState extends State<TicketTearAnimation>
   @override
   Widget build(BuildContext context) {
     final isReduced = CinemaMotion.isReducedMotion(context);
+    final colors = context.cinemaColors;
 
     if (isReduced) {
       return OutlinedButton.icon(
         onPressed: widget.onToggle,
         icon: Icon(
           widget.isSaved ? Icons.bookmark : Icons.bookmark_border,
-          color: widget.isSaved ? CinemaTokens.ticketRed : CinemaTokens.bone,
+          color: widget.isSaved ? colors.accentRed : colors.accentAmber,
         ),
         label: Text(widget.isSaved ? 'SAVED TO WATCHLIST' : 'ADD TO WATCHLIST'),
       );
@@ -145,11 +147,11 @@ class _TicketTearAnimationState extends State<TicketTearAnimation>
                 height: 80,
                 constraints: const BoxConstraints(maxWidth: 360),
                 decoration: BoxDecoration(
-                  color: CinemaTokens.boothBrown,
+                  color: colors.surface,
                   border: Border.all(
                     color: widget.isSaved
-                        ? CinemaTokens.ticketRed
-                        : CinemaTokens.hairline,
+                        ? colors.accentRed
+                        : colors.borderHairline,
                     width: 1.0,
                   ),
                   borderRadius: CinemaTokens.borderSharp,
@@ -169,7 +171,7 @@ class _TicketTearAnimationState extends State<TicketTearAnimation>
                               widget.title,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: CinemaText.monoLabel(color: CinemaTokens.projectorAmber),
+                              style: CinemaText.monoLabel(color: colors.accentAmber),
                             ),
                             const SizedBox(height: 4),
                             Text(
@@ -178,7 +180,7 @@ class _TicketTearAnimationState extends State<TicketTearAnimation>
                                   : 'TEAR TICKET TO ADD TO WATCHLIST',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: CinemaText.bodySmall(color: CinemaTokens.ash),
+                              style: CinemaText.bodySmall(color: colors.textMuted),
                             ),
                           ],
                         ),
@@ -191,7 +193,7 @@ class _TicketTearAnimationState extends State<TicketTearAnimation>
                       bottom: 0,
                       right: 90,
                       child: CustomPaint(
-                        painter: DashedTearLinePainter(),
+                        painter: DashedTearLinePainter(color: colors.borderHairline),
                       ),
                     ),
 
@@ -209,22 +211,22 @@ class _TicketTearAnimationState extends State<TicketTearAnimation>
                           child: Opacity(
                             opacity: _stubOpacity.value.clamp(0.0, 1.0),
                             child: Container(
-                              decoration: const BoxDecoration(
-                                color: CinemaTokens.boothBrownElevated,
-                                border: Border(left: CinemaTokens.borderSideDark),
+                              decoration: BoxDecoration(
+                                color: colors.surfaceElevated,
+                                border: Border(left: BorderSide(color: colors.borderHairline)),
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Icon(
+                                  Icon(
                                     Icons.confirmation_number_outlined,
                                     size: 18,
-                                    color: CinemaTokens.projectorAmber,
+                                    color: colors.accentAmber,
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
                                     'TEAR STUB',
-                                    style: CinemaText.monoBadge(color: CinemaTokens.bone),
+                                    style: CinemaText.monoBadge(color: colors.textPrimary),
                                   ),
                                 ],
                               ),
@@ -282,10 +284,14 @@ class _TicketTearAnimationState extends State<TicketTearAnimation>
 }
 
 class DashedTearLinePainter extends CustomPainter {
+  final Color color;
+
+  DashedTearLinePainter({this.color = CinemaTokens.hairline});
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = CinemaTokens.hairline
+      ..color = color
       ..strokeWidth = 1.5;
 
     const dashHeight = 4.0;
@@ -299,5 +305,5 @@ class DashedTearLinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant DashedTearLinePainter oldDelegate) => oldDelegate.color != color;
 }

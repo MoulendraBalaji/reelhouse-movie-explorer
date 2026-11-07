@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import '../../theme/tokens.dart';
+import '../../theme/app_theme.dart';
 import '../../theme/motion.dart';
 
 class CinemaAnimatedTabs extends StatelessWidget {
@@ -19,12 +20,14 @@ class CinemaAnimatedTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.cinemaColors;
+
     return Container(
       height: 44,
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color: CinemaTokens.boothBrown,
-        border: Border.all(color: CinemaTokens.hairline),
+        color: colors.surface,
+        border: Border.all(color: colors.borderHairline),
         borderRadius: CinemaTokens.borderSharp,
       ),
       child: LayoutBuilder(
@@ -43,11 +46,11 @@ class CinemaAnimatedTabs extends StatelessWidget {
                 width: tabWidth,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: CinemaTokens.projectorAmber,
+                    color: colors.accentAmber,
                     borderRadius: CinemaTokens.borderSharp,
                     boxShadow: [
                       BoxShadow(
-                        color: CinemaTokens.projectorAmber.withValues(alpha: 0.25),
+                        color: colors.accentAmber.withValues(alpha: 0.25),
                         blurRadius: 8,
                       ),
                     ],
@@ -71,8 +74,8 @@ class CinemaAnimatedTabs extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                               letterSpacing: 1.2,
                               color: selectedIndex == i
-                                  ? CinemaTokens.celluloidBlack
-                                  : CinemaTokens.bone,
+                                  ? Colors.black
+                                  : colors.textPrimary,
                             ),
                           ),
                         ),

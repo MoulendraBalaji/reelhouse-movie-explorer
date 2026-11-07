@@ -3,8 +3,8 @@
 
 import 'package:flutter/material.dart';
 import '../../theme/tokens.dart';
+import '../../theme/app_theme.dart';
 import '../../theme/motion.dart';
-import '../../theme/text_styles.dart';
 
 class NumberedHeadingMask extends StatefulWidget {
   final String number;
@@ -74,15 +74,37 @@ class _NumberedHeadingMaskState extends State<NumberedHeadingMask>
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.cinemaColors;
+    final isMobile = MediaQuery.of(context).size.width < 600;
+    final fontSize = isMobile ? 24.0 : 32.0;
+
+    final numberStyle = TextStyle(
+      fontFamily: CinemaTokens.fontDisplay,
+      fontSize: fontSize,
+      letterSpacing: 1.5,
+      color: colors.accentAmber,
+    );
+    final dashStyle = TextStyle(
+      fontFamily: CinemaTokens.fontDisplay,
+      fontSize: fontSize,
+      color: colors.textMuted,
+    );
+    final titleStyle = TextStyle(
+      fontFamily: CinemaTokens.fontDisplay,
+      fontSize: fontSize,
+      letterSpacing: 1.5,
+      color: colors.textPrimary,
+    );
+
     if (CinemaMotion.isReducedMotion(context)) {
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(widget.number, style: CinemaText.sectionTitle(color: CinemaTokens.projectorAmber)),
+          Text(widget.number, style: numberStyle),
           const SizedBox(width: 8),
-          Text('—', style: CinemaText.sectionTitle(color: CinemaTokens.ash)),
+          Text('—', style: dashStyle),
           const SizedBox(width: 8),
-          Text(widget.title, style: CinemaText.sectionTitle(color: CinemaTokens.bone)),
+          Flexible(child: Text(widget.title, style: titleStyle, overflow: TextOverflow.ellipsis)),
         ],
       );
     }
@@ -100,11 +122,11 @@ class _NumberedHeadingMaskState extends State<NumberedHeadingMask>
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(widget.number, style: CinemaText.sectionTitle(color: CinemaTokens.projectorAmber)),
+                    Text(widget.number, style: numberStyle),
                     const SizedBox(width: 8),
-                    Text('—', style: CinemaText.sectionTitle(color: CinemaTokens.ash)),
+                    Text('—', style: dashStyle),
                     const SizedBox(width: 8),
-                    Text(widget.title, style: CinemaText.sectionTitle(color: CinemaTokens.bone)),
+                    Flexible(child: Text(widget.title, style: titleStyle, overflow: TextOverflow.ellipsis)),
                   ],
                 ),
               ),

@@ -12,6 +12,7 @@ import '../core/responsive.dart';
 import '../core/validators.dart';
 import '../core/image_helper.dart';
 import '../theme/tokens.dart';
+import '../theme/app_theme.dart';
 import '../theme/text_styles.dart';
 import '../models/movie.dart';
 import '../providers/movie_provider.dart';
@@ -106,17 +107,20 @@ class _DetailScreenState extends State<DetailScreen> {
     final isSaved = watchlistProvider.isWatchlisted(movie.id);
     final movieReviews = reviewsProvider.getReviewsForMovie(movie.id);
     final isDesktop = Responsive.isDesktop(context);
+    final isMobile = Responsive.isMobile(context);
+    final colors = context.cinemaColors;
 
     return Scaffold(
-      backgroundColor: CinemaTokens.celluloidBlack,
+      backgroundColor: colors.bg,
       body: CustomScrollView(
         slivers: [
           // Parallax Backdrop SliverAppBar
           SliverAppBar(
-            expandedHeight: isDesktop ? 440.0 : 320.0,
+            expandedHeight: isDesktop ? 440.0 : (isMobile ? 260.0 : 340.0),
             pinned: true,
+            backgroundColor: colors.bg,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: CinemaTokens.projectorAmber),
+              icon: Icon(Icons.arrow_back, color: colors.accentAmber),
               tooltip: 'Return to Cinema Catalog',
               onPressed: () {
                 if (Navigator.of(context).canPop()) {
@@ -135,18 +139,18 @@ class _DetailScreenState extends State<DetailScreen> {
                       movie.backdropUrl.isNotEmpty ? movie.backdropUrl : movie.posterUrl,
                     ),
                     fit: BoxFit.cover,
-                    errorBuilder: (ctx, err, stack) => Container(color: CinemaTokens.boothBrown),
+                    errorBuilder: (ctx, err, stack) => Container(color: colors.surface),
                   ),
-                  // Dark Celluloid Gradient
+                  // Ambient Atmospheric Gradient
                   Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          CinemaTokens.celluloidBlack.withValues(alpha: 0.2),
-                          CinemaTokens.celluloidBlack.withValues(alpha: 0.8),
-                          CinemaTokens.celluloidBlack,
+                          Colors.black.withValues(alpha: 0.25),
+                          Colors.black.withValues(alpha: 0.65),
+                          colors.bg,
                         ],
                       ),
                     ),
@@ -166,99 +170,177 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Header Row: Hero Poster + Core Metadata
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Hero Poster with custom flightShuttleBuilder
-                          SizedBox(
-                            width: isDesktop ? 220 : 140,
-                            height: isDesktop ? 330 : 210,
-                            child: Hero(
-                              tag: 'poster_${movie.id}',
-                              flightShuttleBuilder: cinemaFlightShuttleBuilder,
-                              child: FilmStripBorder(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: CinemaTokens.projectorAmber, width: 1.5),
-                                    borderRadius: CinemaTokens.borderSharp,
-                                  ),
-                                  child: PosterImage(
-                                    imageUrl: movie.posterUrl,
-                                    title: movie.title,
+                      // Header: Hero Poster + Core Metadata (Responsive: Column on mobile, Row on tablet/desktop)
+                      if (isMobile)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: SizedBox(
+                                width: 160,
+                                height: 240,
+                                child: Hero(
+                                  tag: 'poster_${movie.id}',
+                                  flightShuttleBuilder: cinemaFlightShuttleBuilder,
+                                  child: FilmStripBorder(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: colors.accentAmber, width: 1.5),
+                                        borderRadius: CinemaTokens.borderSharp,
+                                      ),
+                                      child: PosterImage(
+                                        imageUrl: movie.posterUrl,
+                                        title: movie.title,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          const SizedBox(width: 24),
-
-                          // Title, Tagline, Director & Year
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            const SizedBox(height: 20),
+                            Text(
+                              movie.title.toUpperCase(),
+                              style: TextStyle(
+                                fontFamily: CinemaTokens.fontDisplay,
+                                fontSize: 32,
+                                letterSpacing: 1.5,
+                                color: colors.textPrimary,
+                                height: 1.0,
+                              ),
+                            ),
+                            if (movie.tagline.isNotEmpty) ...[
+                              const SizedBox(height: 6),
+                              Text(
+                                '“${movie.tagline}”',
+                                style: CinemaText.quote(color: colors.accentAmber),
+                              ),
+                            ],
+                            const SizedBox(height: 12),
+                            Wrap(
+                              spacing: 10,
+                              runSpacing: 6,
+                              crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
-                                Text(
-                                  movie.title.toUpperCase(),
-                                  style: TextStyle(
-                                    fontFamily: CinemaTokens.fontDisplay,
-                                    fontSize: isDesktop ? 44 : 28,
-                                    letterSpacing: 2.0,
-                                    color: CinemaTokens.bone,
-                                    height: 1.0,
-                                  ),
-                                ),
-                                if (movie.tagline.isNotEmpty) ...[
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    '“${movie.tagline}”',
-                                    style: CinemaText.quote(color: CinemaTokens.projectorAmber),
-                                  ),
-                                ],
-                                const SizedBox(height: 14),
-
-                                // Metadata items
-                                Wrap(
-                                  spacing: 12,
-                                  runSpacing: 8,
-                                  crossAxisAlignment: WrapCrossAlignment.center,
-                                  children: [
-                                    Text('${movie.year}', style: CinemaText.monoMeta(color: CinemaTokens.projectorAmber)),
-                                    const Text('•', style: TextStyle(color: CinemaTokens.ash)),
-                                    Text(movie.formattedRuntime, style: CinemaText.monoMeta(color: CinemaTokens.bone)),
-                                    const Text('•', style: TextStyle(color: CinemaTokens.ash)),
-                                    Text('DIR: ${movie.director}', style: CinemaText.monoMeta(color: CinemaTokens.bone)),
-                                  ],
-                                ),
-                                const SizedBox(height: 14),
-
-                                // Clapper Rating
-                                ClapperRating(rating: movie.rating, size: 20),
-                                const SizedBox(height: 14),
-
-                                // Genre Tags
-                                Wrap(
-                                  spacing: 8,
-                                  runSpacing: 8,
-                                  children: [
-                                    for (final genre in movie.genres)
-                                      MonoTag(label: genre),
-                                  ],
-                                ),
-                                const SizedBox(height: 20),
-
-                                // Trailer CTA Button
-                                if (movie.trailerYoutubeKey.isNotEmpty)
-                                  ElevatedButton.icon(
-                                    onPressed: () => _openTrailer(movie.trailerYoutubeKey),
-                                    icon: const Icon(Icons.play_circle_outline, size: 18),
-                                    label: const Text('WATCH 35MM TRAILER'),
-                                  ),
+                                Text('${movie.year}', style: CinemaText.monoMeta(color: colors.accentAmber)),
+                                Text('•', style: TextStyle(color: colors.textMuted)),
+                                Text(movie.formattedRuntime, style: CinemaText.monoMeta(color: colors.textPrimary)),
+                                Text('•', style: TextStyle(color: colors.textMuted)),
+                                Text('DIR: ${movie.director}', style: CinemaText.monoMeta(color: colors.textPrimary)),
                               ],
                             ),
-                          ),
-                        ],
-                      ),
+                            const SizedBox(height: 12),
+                            ClapperRating(rating: movie.rating, size: 18),
+                            const SizedBox(height: 12),
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: [
+                                for (final genre in movie.genres)
+                                  MonoTag(label: genre),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            if (movie.trailerYoutubeKey.isNotEmpty)
+                              ElevatedButton.icon(
+                                onPressed: () => _openTrailer(movie.trailerYoutubeKey),
+                                icon: const Icon(Icons.play_circle_outline, size: 18),
+                                label: const Text('WATCH 35MM TRAILER'),
+                              ),
+                          ],
+                        )
+                      else
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Hero Poster with custom flightShuttleBuilder
+                            SizedBox(
+                              width: isDesktop ? 220 : 150,
+                              height: isDesktop ? 330 : 225,
+                              child: Hero(
+                                tag: 'poster_${movie.id}',
+                                flightShuttleBuilder: cinemaFlightShuttleBuilder,
+                                child: FilmStripBorder(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: colors.accentAmber, width: 1.5),
+                                      borderRadius: CinemaTokens.borderSharp,
+                                    ),
+                                    child: PosterImage(
+                                      imageUrl: movie.posterUrl,
+                                      title: movie.title,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 28),
+
+                            // Title, Tagline, Director & Year
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    movie.title.toUpperCase(),
+                                    style: TextStyle(
+                                      fontFamily: CinemaTokens.fontDisplay,
+                                      fontSize: isDesktop ? 44 : 32,
+                                      letterSpacing: 2.0,
+                                      color: colors.textPrimary,
+                                      height: 1.0,
+                                    ),
+                                  ),
+                                  if (movie.tagline.isNotEmpty) ...[
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      '“${movie.tagline}”',
+                                      style: CinemaText.quote(color: colors.accentAmber),
+                                    ),
+                                  ],
+                                  const SizedBox(height: 14),
+
+                                  // Metadata items
+                                  Wrap(
+                                    spacing: 12,
+                                    runSpacing: 8,
+                                    crossAxisAlignment: WrapCrossAlignment.center,
+                                    children: [
+                                      Text('${movie.year}', style: CinemaText.monoMeta(color: colors.accentAmber)),
+                                      Text('•', style: TextStyle(color: colors.textMuted)),
+                                      Text(movie.formattedRuntime, style: CinemaText.monoMeta(color: colors.textPrimary)),
+                                      Text('•', style: TextStyle(color: colors.textMuted)),
+                                      Text('DIR: ${movie.director}', style: CinemaText.monoMeta(color: colors.textPrimary)),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 14),
+
+                                  // Clapper Rating
+                                  ClapperRating(rating: movie.rating, size: 20),
+                                  const SizedBox(height: 14),
+
+                                  // Genre Tags
+                                  Wrap(
+                                    spacing: 8,
+                                    runSpacing: 8,
+                                    children: [
+                                      for (final genre in movie.genres)
+                                        MonoTag(label: genre),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+
+                                  // Trailer CTA Button
+                                  if (movie.trailerYoutubeKey.isNotEmpty)
+                                    ElevatedButton.icon(
+                                      onPressed: () => _openTrailer(movie.trailerYoutubeKey),
+                                      icon: const Icon(Icons.play_circle_outline, size: 18),
+                                      label: const Text('WATCH 35MM TRAILER'),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
 
                       const SizedBox(height: 36),
 
@@ -278,13 +360,18 @@ class _DetailScreenState extends State<DetailScreen> {
                           fontFamily: CinemaTokens.fontDisplay,
                           fontSize: 24,
                           letterSpacing: 2,
-                          color: CinemaTokens.projectorAmber,
+                          color: colors.accentAmber,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         movie.overview,
-                        style: CinemaText.bodyLarge(color: CinemaTokens.bone),
+                        style: TextStyle(
+                          fontFamily: CinemaTokens.fontSerif,
+                          fontSize: 16.0,
+                          height: 1.6,
+                          color: colors.textPrimary,
+                        ),
                       ),
 
                       const SizedBox(height: 36),
@@ -297,7 +384,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             fontFamily: CinemaTokens.fontDisplay,
                             fontSize: 24,
                             letterSpacing: 2,
-                            color: CinemaTokens.projectorAmber,
+                            color: colors.accentAmber,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -313,8 +400,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                 width: 140,
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  color: CinemaTokens.boothBrown,
-                                  border: Border.all(color: CinemaTokens.hairline),
+                                  color: colors.surface,
+                                  border: Border.all(color: colors.borderHairline),
                                   borderRadius: CinemaTokens.borderSharp,
                                 ),
                                 child: Column(
@@ -325,14 +412,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                       member.name,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: CinemaText.monoLabel(color: CinemaTokens.bone),
+                                      style: CinemaText.monoLabel(color: colors.textPrimary),
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
                                       member.character,
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
-                                      style: CinemaText.bodySmall(color: CinemaTokens.ash),
+                                      style: CinemaText.bodySmall(color: colors.textMuted),
                                     ),
                                   ],
                                 ),
@@ -350,7 +437,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           fontFamily: CinemaTokens.fontDisplay,
                           fontSize: 24,
                           letterSpacing: 2,
-                          color: CinemaTokens.projectorAmber,
+                          color: colors.accentAmber,
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -359,8 +446,8 @@ class _DetailScreenState extends State<DetailScreen> {
                       Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: CinemaTokens.boothBrown,
-                          border: Border.all(color: CinemaTokens.hairline),
+                          color: colors.surface,
+                          border: Border.all(color: colors.borderHairline),
                           borderRadius: CinemaTokens.borderSharp,
                         ),
                         child: Form(
@@ -370,7 +457,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             children: [
                               Text(
                                 'SUBMIT YOUR 35MM CRITIQUE',
-                                style: CinemaText.monoLabel(color: CinemaTokens.projectorAmber),
+                                style: CinemaText.monoLabel(color: colors.accentAmber),
                               ),
                               const SizedBox(height: 14),
 
@@ -386,26 +473,32 @@ class _DetailScreenState extends State<DetailScreen> {
                                 controller: _critiqueController,
                                 maxLines: 4,
                                 validator: CinemaValidators.validateReviewText,
-                                style: CinemaText.bodyMedium(color: CinemaTokens.bone),
+                                style: TextStyle(
+                                  fontFamily: CinemaTokens.fontSerif,
+                                  fontSize: 14.0,
+                                  color: colors.textPrimary,
+                                ),
                                 decoration: const InputDecoration(
                                   hintText: 'Share your cinematic impression (10 to 500 characters)...',
                                 ),
                               ),
                               const SizedBox(height: 16),
 
-                              Row(
+                              Wrap(
+                                spacing: 16,
+                                runSpacing: 10,
+                                crossAxisAlignment: WrapCrossAlignment.center,
                                 children: [
                                   ElevatedButton.icon(
                                     onPressed: () => _submitReview(movie),
                                     icon: const Icon(Icons.movie, size: 18),
                                     label: const Text('CLAP & LOG CRITIQUE'),
                                   ),
-                                  const SizedBox(width: 16),
                                   ClapperboardClap(
                                     key: _clapperKey,
                                     successChild: Text(
                                       'CRITIQUE DISPATCHED TO ARCHIVE!',
-                                      style: CinemaText.monoBadge(color: CinemaTokens.projectorAmber),
+                                      style: CinemaText.monoBadge(color: colors.accentAmber),
                                     ),
                                   ),
                                 ],
@@ -419,11 +512,11 @@ class _DetailScreenState extends State<DetailScreen> {
 
                       // Existing Reviews List
                       if (movieReviews.isEmpty)
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 16),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
                           child: Text(
                             'No patron critiques yet. Be the first to clap for this film!',
-                            style: TextStyle(color: CinemaTokens.ash),
+                            style: TextStyle(color: colors.textMuted),
                           ),
                         )
                       else
@@ -437,8 +530,8 @@ class _DetailScreenState extends State<DetailScreen> {
                             return Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                color: CinemaTokens.boothBrownElevated,
-                                border: Border.all(color: CinemaTokens.hairline),
+                                color: colors.surfaceElevated,
+                                border: Border.all(color: colors.borderHairline),
                                 borderRadius: CinemaTokens.borderSharp,
                               ),
                               child: Column(
@@ -447,12 +540,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(rev.userName, style: CinemaText.monoLabel(color: CinemaTokens.projectorAmber)),
+                                      Text(rev.userName, style: CinemaText.monoLabel(color: colors.accentAmber)),
                                       ClapperRating(rating: rev.rating * 2.0, size: 12, showNumeric: false),
                                     ],
                                   ),
                                   const SizedBox(height: 8),
-                                  Text(rev.comment, style: CinemaText.bodyMedium(color: CinemaTokens.bone)),
+                                  Text(rev.comment, style: TextStyle(fontFamily: CinemaTokens.fontSerif, fontSize: 14.0, color: colors.textPrimary)),
                                 ],
                               ),
                             );

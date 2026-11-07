@@ -33,3 +33,6 @@ __pycache__/
 # Symbolication / Obfuscation
 app.*.symbols
 app.*.map.json
+
+# Local scratch and test artifacts
+scratch/
