@@ -89,19 +89,32 @@ class _ProjectorCountdownLeaderState extends State<ProjectorCountdownLeader>
   @override
   Widget build(BuildContext context) {
     if (CinemaMotion.isReducedMotion(context)) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        widget.onCountdownComplete();
+      });
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('REELHOUSE', style: CinemaText.heroTitle(color: CinemaTokens.projectorAmber)),
             const SizedBox(height: 16),
-            Text('INITIALIZING PROJECTION...', style: CinemaText.monoLabel(color: CinemaTokens.ash)),
+            ElevatedButton(
+              onPressed: widget.onCountdownComplete,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: CinemaTokens.projectorAmber,
+                foregroundColor: CinemaTokens.celluloidBlack,
+              ),
+              child: const Text('ENTER CINEMA'),
+            ),
           ],
         ),
       );
     }
 
-    return RepaintBoundary(
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: widget.onCountdownComplete,
+      child: RepaintBoundary(
       child: Transform.translate(
         offset: Offset(_gateWeaveX, _gateWeaveY),
         child: AnimatedBuilder(
@@ -195,8 +208,9 @@ class _ProjectorCountdownLeaderState extends State<ProjectorCountdownLeader>
           },
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
 
 /// CustomPainter for scrolling 35mm sprocket holes along both margins

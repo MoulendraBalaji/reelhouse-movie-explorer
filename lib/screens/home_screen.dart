@@ -89,7 +89,9 @@ class HomeScreen extends StatelessWidget {
             Stack(
               children: [
                 const Positioned.fill(
-                  child: ProjectorBeamParticles(height: 520),
+                  child: IgnorePointer(
+                    child: ProjectorBeamParticles(height: 520),
+                  ),
                 ),
                 HeroCarouselKenBurns(
                   movies: nowShowing,
@@ -183,6 +185,7 @@ class HomeScreen extends StatelessWidget {
                 onTap: () => _openDetail(context, movie),
                 child: TicketStubCard(
                   movie: movie,
+                  onTap: () => _openDetail(context, movie),
                   width: 220,
                   height: 360,
                 ),

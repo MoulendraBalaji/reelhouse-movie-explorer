@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../core/responsive.dart';
 import '../core/validators.dart';
+import '../core/image_helper.dart';
 import '../theme/tokens.dart';
 import '../theme/text_styles.dart';
 import '../models/movie.dart';
@@ -123,7 +124,9 @@ class _DetailScreenState extends State<DetailScreen> {
                 fit: StackFit.expand,
                 children: [
                   Image.network(
-                    movie.backdropUrl.isNotEmpty ? movie.backdropUrl : movie.posterUrl,
+                    ImageUrlHelper.format(
+                      movie.backdropUrl.isNotEmpty ? movie.backdropUrl : movie.posterUrl,
+                    ),
                     fit: BoxFit.cover,
                     errorBuilder: (ctx, err, stack) => Container(color: CinemaTokens.boothBrown),
                   ),
@@ -173,7 +176,10 @@ class _DetailScreenState extends State<DetailScreen> {
                                     border: Border.all(color: CinemaTokens.projectorAmber, width: 1.5),
                                     borderRadius: CinemaTokens.borderSharp,
                                   ),
-                                  child: PosterImage(imageUrl: movie.posterUrl),
+                                  child: PosterImage(
+                                    imageUrl: movie.posterUrl,
+                                    title: movie.title,
+                                  ),
                                 ),
                               ),
                             ),

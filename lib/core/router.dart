@@ -29,14 +29,15 @@ class AppRouter {
 
     switch (path) {
       case '/':
+      case '/home':
+        return fadeThroughBlackRoute(const HomeScreen(), settings);
+
+      case '/splash':
         return PageRouteBuilder(
           settings: settings,
           pageBuilder: (context, animation, secondaryAnimation) => const SplashScreen(),
           transitionDuration: Duration.zero,
         );
-
-      case '/home':
-        return fadeThroughBlackRoute(const HomeScreen(), settings);
 
       case '/explore':
         return horizontalWipeRoute(const ExploreScreen(), settings);

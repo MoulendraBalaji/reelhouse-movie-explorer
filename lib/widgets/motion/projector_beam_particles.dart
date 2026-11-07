@@ -124,20 +124,22 @@ class _ProjectorBeamParticlesState extends State<ProjectorBeamParticles>
         children: [
           // Projector Beam Cone & Floating Motes CustomPainter
           Positioned.fill(
-            child: AnimatedBuilder(
-              animation: _tickerController,
-              builder: (context, _) {
-                final t = _tickerController.value * 2 * math.pi;
-                // Low frequency noise on lamp opacity (lamp flicker)
-                final flicker = 0.14 + (0.04 * math.sin(t * 3.0)) + (0.02 * math.cos(t * 7.5));
+            child: IgnorePointer(
+              child: AnimatedBuilder(
+                animation: _tickerController,
+                builder: (context, _) {
+                  final t = _tickerController.value * 2 * math.pi;
+                  // Low frequency noise on lamp opacity (lamp flicker)
+                  final flicker = 0.14 + (0.04 * math.sin(t * 3.0)) + (0.02 * math.cos(t * 7.5));
 
-                return CustomPaint(
-                  painter: BeamParticlesPainter(
-                    flickerAlpha: flicker.clamp(0.08, 0.22),
-                    particles: _particles.take(activeParticleCount).toList(),
-                  ),
-                );
-              },
+                  return CustomPaint(
+                    painter: BeamParticlesPainter(
+                      flickerAlpha: flicker.clamp(0.08, 0.22),
+                      particles: _particles.take(activeParticleCount).toList(),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           if (widget.child != null) widget.child!,

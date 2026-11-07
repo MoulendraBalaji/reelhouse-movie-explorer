@@ -198,7 +198,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           onExit: (_) => ReelCursorScope.setMode(context, CursorMode.normal),
                           child: TiltPosterCard(
                             onTap: () => _openDetail(context, movie),
-                            child: TicketStubCard(movie: movie),
+                            child: TicketStubCard(
+                              movie: movie,
+                              onTap: () => _openDetail(context, movie),
+                            ),
                           ),
                         );
                       },

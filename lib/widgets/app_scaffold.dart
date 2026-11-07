@@ -12,8 +12,6 @@ import '../providers/theme_provider.dart';
 import '../providers/movie_provider.dart';
 import '../providers/auth_provider.dart';
 import 'motion/lamp_theme_switch.dart';
-import 'film_grain_overlay.dart';
-import 'motion/reel_cursor.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget body;
@@ -68,10 +66,8 @@ class AppScaffold extends StatelessWidget {
     final themeProvider = context.watch<ThemeProvider>();
     final isDark = themeProvider.isDarkMode;
 
-    return ReelCursorHost(
-      child: FilmGrainOverlay(
-        child: Scaffold(
-          appBar: showHeader
+    return Scaffold(
+      appBar: showHeader
               ? AppBar(
                   toolbarHeight: 64,
                   title: Row(
@@ -230,8 +226,6 @@ class AppScaffold extends StatelessWidget {
                   ],
                 )
               : null,
-        ),
-      ),
     );
   }
 

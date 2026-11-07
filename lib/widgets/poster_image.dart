@@ -1,15 +1,17 @@
 // REUSABLE WIDGET: PosterImage
-// Network image loader with film border, cinema loading skeleton, and fallback error placeholder.
+// Network image loader with CORS proxy support, cinema loading skeleton, and fallback lobby card.
 
 import 'package:flutter/material.dart';
 import '../theme/tokens.dart';
 import '../theme/text_styles.dart';
+import '../core/image_helper.dart';
 
 class PosterImage extends StatelessWidget {
   final String imageUrl;
   final BoxFit fit;
   final double? width;
   final double? height;
+  final String? title;
 
   const PosterImage({
     super.key,
@@ -17,16 +19,19 @@ class PosterImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.width,
     this.height,
+    this.title,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (imageUrl.isEmpty) {
+    final proxiedUrl = ImageUrlHelper.format(imageUrl);
+
+    if (proxiedUrl.isEmpty) {
       return _buildPlaceholder();
     }
 
     return Image.network(
-      imageUrl,
+      proxiedUrl,
       width: width,
       height: height,
       fit: fit,
@@ -56,16 +61,46 @@ class PosterImage extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      color: CinemaTokens.boothBrown,
-      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: CinemaTokens.boothBrown,
+        border: Border.all(color: CinemaTokens.hairline),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.movie_creation_outlined, size: 36, color: CinemaTokens.ash),
-            const SizedBox(height: 8),
+            Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: CinemaTokens.projectorAmber.withValues(alpha: 0.5), width: 1.5),
+                color: CinemaTokens.celluloidBlack,
+              ),
+              child: const Center(
+                child: Icon(Icons.movie_creation_outlined, size: 22, color: CinemaTokens.projectorAmber),
+              ),
+            ),
+            const SizedBox(height: 12),
+            if (title != null && title!.isNotEmpty) ...[
+              Text(
+                title!.toUpperCase(),
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontFamily: CinemaTokens.fontDisplay,
+                  fontSize: 16,
+                  letterSpacing: 1.0,
+                  color: CinemaTokens.bone,
+                ),
+              ),
+              const SizedBox(height: 4),
+            ],
             Text(
-              '35MM FILM CELL',
+              '35MM ARCHIVE REEL',
               textAlign: TextAlign.center,
               style: CinemaText.monoBadge(color: CinemaTokens.ash),
             ),

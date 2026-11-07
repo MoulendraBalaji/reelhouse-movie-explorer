@@ -8,6 +8,7 @@ import '../../theme/tokens.dart';
 import '../../theme/motion.dart';
 import '../../theme/text_styles.dart';
 import '../../models/movie.dart';
+import '../../core/image_helper.dart';
 import '../mono_tag.dart';
 import '../clapper_rating.dart';
 
@@ -148,9 +149,11 @@ class _HeroCarouselKenBurnsState extends State<HeroCarouselKenBurns>
                           child: Transform.scale(
                             scale: zoom,
                             child: Image.network(
-                              movie.backdropUrl.isNotEmpty
-                                  ? movie.backdropUrl
-                                  : movie.posterUrl,
+                              ImageUrlHelper.format(
+                                movie.backdropUrl.isNotEmpty
+                                    ? movie.backdropUrl
+                                    : movie.posterUrl,
+                              ),
                               fit: BoxFit.cover,
                               errorBuilder: (ctx, err, stack) => Container(
                                 color: CinemaTokens.boothBrown,

@@ -50,7 +50,7 @@ class ReelhouseApp extends StatelessWidget {
               darkTheme: CinemaTheme.midnightTheme,
               themeMode: themeProvider.themeMode,
               onGenerateRoute: AppRouter.onGenerateRoute,
-              initialRoute: '/',
+              initialRoute: '/home',
             ),
           );
         },

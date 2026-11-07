@@ -69,29 +69,35 @@ class TicketStubCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipPath(
-      clipper: TicketStubClipper(notchRadius: 8.0, notchFraction: 0.68),
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          color: CinemaTokens.boothBrown,
-          border: Border.all(color: CinemaTokens.hairline, width: 1.0),
-          borderRadius: CinemaTokens.borderSharp,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Poster Artwork
-            Expanded(
-              flex: 68,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  PosterImage(
-                    imageUrl: movie.posterUrl,
-                    fit: BoxFit.cover,
-                  ),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: CinemaTokens.borderSharp,
+        child: ClipPath(
+          clipper: TicketStubClipper(notchRadius: 8.0, notchFraction: 0.68),
+          child: Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+              color: CinemaTokens.boothBrown,
+              border: Border.all(color: CinemaTokens.hairline, width: 1.0),
+              borderRadius: CinemaTokens.borderSharp,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Poster Artwork
+                Expanded(
+                  flex: 68,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      PosterImage(
+                        imageUrl: movie.posterUrl,
+                        title: movie.title,
+                        fit: BoxFit.cover,
+                      ),
                   // Rating badge overlay on poster top right
                   Positioned(
                     top: 8,
@@ -178,8 +184,10 @@ class TicketStubCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
+    ),
+  ),
+);
+}
 }
 
 class HorizontalDashedLinePainter extends CustomPainter {

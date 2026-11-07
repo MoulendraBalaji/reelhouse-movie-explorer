@@ -126,6 +126,7 @@ class _TiltPosterCardState extends State<TiltPosterCard>
           onHover: (e) => _onPointerHover(e, cardSize),
           onExit: _onPointerExit,
           child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
             onTap: widget.onTap,
             onTapDown: (_) => setState(() => _isPressed = true),
             onTapUp: (_) => setState(() => _isPressed = false),

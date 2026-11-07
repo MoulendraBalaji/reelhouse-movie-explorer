@@ -133,7 +133,10 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                                         SizedBox(
                                           width: 72,
                                           height: 100,
-                                          child: PosterImage(imageUrl: movie.posterUrl),
+                                          child: PosterImage(
+                                            imageUrl: movie.posterUrl,
+                                            title: movie.title,
+                                          ),
                                         ),
                                         const SizedBox(width: 16),
 
