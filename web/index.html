@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="REELHOUSE Movie Explorer — Every film, one reel at a time.">
+  <meta name="theme-color" content="#0E0C0A">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="REELHOUSE">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>REELHOUSE — Every film, one reel at a time</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+      background-color: #0E0C0A;
+      margin: 0;
+      padding: 0;
+      color: #F2E8D5;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+    }
+    #loading-splash {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: flicker 2s infinite ease-in-out;
+    }
+    .sprocket-box {
+      width: 64px;
+      height: 64px;
+      border: 2px solid #FFB020;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      box-shadow: 0 0 15px rgba(255, 176, 32, 0.3);
+    }
+    .amber-dot {
+      width: 16px;
+      height: 16px;
+      background-color: #FFB020;
+      border-radius: 50%;
+      animation: pulse 1s infinite alternate;
+    }
+    .title {
+      font-size: 28px;
+      letter-spacing: 6px;
+      font-weight: 900;
+      color: #FFB020;
+      margin: 0 0 8px 0;
+      text-transform: uppercase;
+    }
+    .subtitle {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #8A8070;
+      text-transform: uppercase;
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.85; }
+      75% { opacity: 0.95; }
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.8); opacity: 0.6; }
+      100% { transform: scale(1.2); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading-splash">
+    <div class="sprocket-box">
+      <div class="amber-dot"></div>
+    </div>
+    <div class="title">REELHOUSE</div>
+    <div class="subtitle">THREADING 35MM PROJECTOR...</div>
+  </div>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

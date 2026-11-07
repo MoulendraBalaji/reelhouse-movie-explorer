@@ -1,0 +1,1442 @@
+[
+  {
+    "id": 1,
+    "title": "Oppenheimer",
+    "tagline": "The world forever changes.",
+    "year": 2023,
+    "release_date": "2023-07-21",
+    "genres": [
+      "Drama",
+      "History",
+      "Biography"
+    ],
+    "rating": 8.9,
+    "runtime": 180,
+    "overview": "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb during World War II.",
+    "director": "Christopher Nolan",
+    "cast": [
+      {
+        "name": "Cillian Murphy",
+        "character": "J. Robert Oppenheimer",
+        "profile_path": "https://image.tmdb.org/t/p/w185/360RfrObvQC22zpX7b557oYls0k.jpg"
+      },
+      {
+        "name": "Emily Blunt",
+        "character": "Katherine 'Kitty' Oppenheimer",
+        "profile_path": "https://image.tmdb.org/t/p/w185/nPJXaRMbuNm1bNfJgZ4kvd6zL6S.jpg"
+      },
+      {
+        "name": "Matt Damon",
+        "character": "Leslie Groves",
+        "profile_path": "https://image.tmdb.org/t/p/w185/elSlNg0WqjGExLdi0EhpH7U48c9.jpg"
+      },
+      {
+        "name": "Robert Downey Jr.",
+        "character": "Lewis Strauss",
+        "profile_path": "https://image.tmdb.org/t/p/w185/im9SAqJPZKEbVZGmjXuLI4O7RvM.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/fm6K9vYQ03929YIZr2z94yK9o1u.jpg",
+    "trailer_key": "uYPbbksJxIg",
+    "category": "now_showing"
+  },
+  {
+    "id": 2,
+    "title": "Dune: Part Two",
+    "tagline": "Long live the fighters.",
+    "year": 2024,
+    "release_date": "2024-03-01",
+    "genres": [
+      "Science Fiction",
+      "Adventure"
+    ],
+    "rating": 8.8,
+    "runtime": 166,
+    "overview": "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+    "director": "Denis Villeneuve",
+    "cast": [
+      {
+        "name": "Timothée Chalamet",
+        "character": "Paul Atreides",
+        "profile_path": "https://image.tmdb.org/t/p/w185/BE2sdjpgsa2rNTFa66f7upkaOP.jpg"
+      },
+      {
+        "name": "Zendaya",
+        "character": "Chani",
+        "profile_path": "https://image.tmdb.org/t/p/w185/so3GQRnOC0rkZwtI9L9aqZ8d9k.jpg"
+      },
+      {
+        "name": "Rebecca Ferguson",
+        "character": "Lady Jessica",
+        "profile_path": "https://image.tmdb.org/t/p/w185/6NR8tGfsmqF7N3hC3N18h8aP8t0.jpg"
+      },
+      {
+        "name": "Austin Butler",
+        "character": "Feyd-Rautha Harkonnen",
+        "profile_path": "https://image.tmdb.org/t/p/w185/2gT9Gg4jOshsW5dO9hK46Ff4vV.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/xOMo8BRK7PfcJv9JCnx7s520ffq.jpg",
+    "trailer_key": "Way9Dexny3w",
+    "category": "now_showing"
+  },
+  {
+    "id": 3,
+    "title": "Blade Runner 2049",
+    "tagline": "The key to the future is finally unearthed.",
+    "year": 2017,
+    "release_date": "2017-10-06",
+    "genres": [
+      "Science Fiction",
+      "Mystery",
+      "Drama"
+    ],
+    "rating": 8.5,
+    "runtime": 164,
+    "overview": "Thirty years after the events of the first film, a new Blade Runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos.",
+    "director": "Denis Villeneuve",
+    "cast": [
+      {
+        "name": "Ryan Gosling",
+        "character": "K",
+        "profile_path": "https://image.tmdb.org/t/p/w185/lyUyARfgjmuheh9gWNsAeMPRo5w.jpg"
+      },
+      {
+        "name": "Harrison Ford",
+        "character": "Rick Deckard",
+        "profile_path": "https://image.tmdb.org/t/p/w185/7C3OC4U70m726pZ77C5e1O3eT0.jpg"
+      },
+      {
+        "name": "Ana de Armas",
+        "character": "Joi",
+        "profile_path": "https://image.tmdb.org/t/p/w185/3vxvsmYykCY3v0v7vV333O3vR0.jpg"
+      },
+      {
+        "name": "Sylvia Hoeks",
+        "character": "Luv",
+        "profile_path": "https://image.tmdb.org/t/p/w185/5k5e4o0k7b557oYls0k46Ff4vV.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/ilRyASDvt7v11gWkW9h0pzyN28l.jpg",
+    "trailer_key": "gCcx85zbxz4",
+    "category": "now_showing"
+  },
+  {
+    "id": 4,
+    "title": "Interstellar",
+    "tagline": "Mankind was born on Earth. It was never meant to die here.",
+    "year": 2014,
+    "release_date": "2014-11-07",
+    "genres": [
+      "Adventure",
+      "Drama",
+      "Science Fiction"
+    ],
+    "rating": 8.7,
+    "runtime": 169,
+    "overview": "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
+    "director": "Christopher Nolan",
+    "cast": [
+      {
+        "name": "Matthew McConaughey",
+        "character": "Joseph Cooper",
+        "profile_path": "https://image.tmdb.org/t/p/w185/sY2wa52skzLOVIClVy7NCadLLko.jpg"
+      },
+      {
+        "name": "Anne Hathaway",
+        "character": "Amelia Brand",
+        "profile_path": "https://image.tmdb.org/t/p/w185/tL6MB0L0z609e2098679860b0.jpg"
+      },
+      {
+        "name": "Jessica Chastain",
+        "character": "Murphy Cooper",
+        "profile_path": "https://image.tmdb.org/t/p/w185/ArQ755f10q690h7b557oYls0k.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/xJHokMbljvjADYdit5fK5VQsXEG.jpg",
+    "trailer_key": "zSWdZVtXT7E",
+    "category": "now_showing"
+  },
+  {
+    "id": 5,
+    "title": "Parasite",
+    "tagline": "Act like you own the place.",
+    "year": 2019,
+    "release_date": "2019-05-30",
+    "genres": [
+      "Comedy",
+      "Thriller",
+      "Drama"
+    ],
+    "rating": 8.5,
+    "runtime": 132,
+    "overview": "All unemployed, Ki-taek's family takes peculiar interest in the wealthy and glamorous Parks for their livelihood until they get entangled in an unexpected incident.",
+    "director": "Bong Joon-ho",
+    "cast": [
+      {
+        "name": "Song Kang-ho",
+        "character": "Kim Ki-taek",
+        "profile_path": "https://image.tmdb.org/t/p/w185/k10z6b0k7b557oYls0k46Ff4vV.jpg"
+      },
+      {
+        "name": "Lee Sun-kyun",
+        "character": "Park Dong-ik",
+        "profile_path": "https://image.tmdb.org/t/p/w185/m20z6b0k7b557oYls0k46Ff4vV.jpg"
+      },
+      {
+        "name": "Cho Yeo-jeong",
+        "character": "Park Yeon-gyo",
+        "profile_path": "https://image.tmdb.org/t/p/w185/n30z6b0k7b557oYls0k46Ff4vV.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/hiKmpZMGZsrkA3cdce8a7Dpos1j.jpg",
+    "trailer_key": "5xH0R_uxnM8",
+    "category": "trending"
+  },
+  {
+    "id": 6,
+    "title": "The Godfather",
+    "tagline": "An offer you can't refuse.",
+    "year": 1972,
+    "release_date": "1972-03-24",
+    "genres": [
+      "Drama",
+      "Crime"
+    ],
+    "rating": 9.2,
+    "runtime": 175,
+    "overview": "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers.",
+    "director": "Francis Ford Coppola",
+    "cast": [
+      {
+        "name": "Marlon Brando",
+        "character": "Don Vito Corleone",
+        "profile_path": "https://image.tmdb.org/t/p/w185/fuTE9ndD2qP1n8eN6n9rP7T0.jpg"
+      },
+      {
+        "name": "Al Pacino",
+        "character": "Michael Corleone",
+        "profile_path": "https://image.tmdb.org/t/p/w185/2JwH0D2qP1n8eN6n9rP7T0.jpg"
+      },
+      {
+        "name": "James Caan",
+        "character": "Sonny Corleone",
+        "profile_path": "https://image.tmdb.org/t/p/w185/3KwH0D2qP1n8eN6n9rP7T0.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/tmU7GeKVybMWFButWEGl2M4GeiP.jpg",
+    "trailer_key": "sY1S34973zA",
+    "category": "top_rated"
+  },
+  {
+    "id": 7,
+    "title": "Pulp Fiction",
+    "tagline": "Just because you are a character doesn't mean you have character.",
+    "year": 1994,
+    "release_date": "1994-10-14",
+    "genres": [
+      "Thriller",
+      "Crime"
+    ],
+    "rating": 8.9,
+    "runtime": 154,
+    "overview": "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in four tales of violence and redemption.",
+    "director": "Quentin Tarantino",
+    "cast": [
+      {
+        "name": "John Travolta",
+        "character": "Vincent Vega",
+        "profile_path": "https://image.tmdb.org/t/p/w185/7wD9k46Ff4vV.jpg"
+      },
+      {
+        "name": "Samuel L. Jackson",
+        "character": "Jules Winnfield",
+        "profile_path": "https://image.tmdb.org/t/p/w185/8wD9k46Ff4vV.jpg"
+      },
+      {
+        "name": "Uma Thurman",
+        "character": "Mia Wallace",
+        "profile_path": "https://image.tmdb.org/t/p/w185/9wD9k46Ff4vV.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/suaEOtk1N1sgg2MTM7oZd2cfVp3.jpg",
+    "trailer_key": "t4lwMStB5Yw",
+    "category": "top_rated"
+  },
+  {
+    "id": 8,
+    "title": "The Shawshank Redemption",
+    "tagline": "Fear can hold you prisoner. Hope can set you free.",
+    "year": 1994,
+    "release_date": "1994-09-23",
+    "genres": [
+      "Drama",
+      "Crime"
+    ],
+    "rating": 9.3,
+    "runtime": 142,
+    "overview": "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden.",
+    "director": "Frank Darabont",
+    "cast": [
+      {
+        "name": "Tim Robbins",
+        "character": "Andy Dufresne",
+        "profile_path": "https://image.tmdb.org/t/p/w185/jKwH0D2qP1n8eN6n9rP7T0.jpg"
+      },
+      {
+        "name": "Morgan Freeman",
+        "character": "Ellis Boyd 'Red' Redding",
+        "profile_path": "https://image.tmdb.org/t/p/w185/o7WwH0D2qP1n8eN6n9rP7T0.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/kXfqcdQKsToO0OUXHcrrNCHDBzO.jpg",
+    "trailer_key": "PLl99DlL6b4",
+    "category": "top_rated"
+  },
+  {
+    "id": 9,
+    "title": "Spirited Away",
+    "tagline": "The tunnel led Chihiro to a mysterious town.",
+    "year": 2001,
+    "release_date": "2001-07-20",
+    "genres": [
+      "Animation",
+      "Family",
+      "Fantasy"
+    ],
+    "rating": 8.6,
+    "runtime": 125,
+    "overview": "A young girl, Chihiro, becomes trapped in a strange new world of spirits. When her parents undergo a mysterious transformation, she must call upon the courage she never knew she had to free her family.",
+    "director": "Hayao Miyazaki",
+    "cast": [
+      {
+        "name": "Rumi Hiiragi",
+        "character": "Chihiro Ogino",
+        "profile_path": "https://image.tmdb.org/t/p/w185/a1.jpg"
+      },
+      {
+        "name": "Miyu Irino",
+        "character": "Haku",
+        "profile_path": "https://image.tmdb.org/t/p/w185/a2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/Ab8mkHmkYADjU7wQiOkia9BzGvS.jpg",
+    "trailer_key": "ByXuk9QqQkk",
+    "category": "top_rated"
+  },
+  {
+    "id": 10,
+    "title": "Casablanca",
+    "tagline": "They have a date with fate in Casablanca!",
+    "year": 1942,
+    "release_date": "1942-11-26",
+    "genres": [
+      "Drama",
+      "Romance"
+    ],
+    "rating": 8.5,
+    "runtime": 102,
+    "overview": "A cynical American expatriate struggles to decide whether or not he should help his former lover and her fugitive husband escape French Morocco.",
+    "director": "Michael Curtiz",
+    "cast": [
+      {
+        "name": "Humphrey Bogart",
+        "character": "Rick Blaine",
+        "profile_path": "https://image.tmdb.org/t/p/w185/b1.jpg"
+      },
+      {
+        "name": "Ingrid Bergman",
+        "character": "Ilsa Lund",
+        "profile_path": "https://image.tmdb.org/t/p/w185/b2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/5K7cOHoay2mZusSLezBOY0Qxh8a.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/y4a0k5g89f89vV333O3vR0.jpg",
+    "trailer_key": "BkL9l7qovsE",
+    "category": "top_rated"
+  },
+  {
+    "id": 11,
+    "title": "Metropolis",
+    "tagline": "There can be no understanding between the hand and the brain unless the heart acts as mediator.",
+    "year": 1927,
+    "release_date": "1927-01-10",
+    "genres": [
+      "Drama",
+      "Science Fiction"
+    ],
+    "rating": 8.2,
+    "runtime": 153,
+    "overview": "In a futuristic city sharply divided between the working class and the city planners, the son of the city's mastermind falls in love with a working-class prophet who predicts the coming of a savior.",
+    "director": "Fritz Lang",
+    "cast": [
+      {
+        "name": "Alfred Abel",
+        "character": "Joh Fredersen",
+        "profile_path": "https://image.tmdb.org/t/p/w185/c1.jpg"
+      },
+      {
+        "name": "Brigitte Helm",
+        "character": "Maria / The Machine Man",
+        "profile_path": "https://image.tmdb.org/t/p/w185/c2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/pxPnvwY1QGvG6n6b1iC9T6m5KkL.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/w25PjI4u8U4X8hY9J6kL5tnGzr.jpg",
+    "trailer_key": "gdtfZ3y9Ovw",
+    "category": "top_rated"
+  },
+  {
+    "id": 12,
+    "title": "Rear Window",
+    "tagline": "It only takes one witness to spoil the perfect crime.",
+    "year": 1954,
+    "release_date": "1954-09-01",
+    "genres": [
+      "Mystery",
+      "Thriller"
+    ],
+    "rating": 8.5,
+    "runtime": 112,
+    "overview": "A wheelchair-bound photographer spies on his neighbors from his Greenwich Village courtyard apartment window, and becomes convinced one of them has committed murder.",
+    "director": "Alfred Hitchcock",
+    "cast": [
+      {
+        "name": "James Stewart",
+        "character": "L.B. 'Jeff' Jefferies",
+        "profile_path": "https://image.tmdb.org/t/p/w185/d1.jpg"
+      },
+      {
+        "name": "Grace Kelly",
+        "character": "Lisa Carol Fremont",
+        "profile_path": "https://image.tmdb.org/t/p/w185/d2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/ILVF059wrMddqeNu8uhio7ydqU.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/2wT8s8aP8t0kL5tnGzr.jpg",
+    "trailer_key": "m01YktiEZcw",
+    "category": "top_rated"
+  },
+  {
+    "id": 13,
+    "title": "The Matrix",
+    "tagline": "Welcome to the Real World.",
+    "year": 1999,
+    "release_date": "1999-03-31",
+    "genres": [
+      "Action",
+      "Science Fiction"
+    ],
+    "rating": 8.7,
+    "runtime": 136,
+    "overview": "Set in the 22nd century, The Matrix tells the story of a computer hacker who learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+    "director": "Lana Wachowski, Lilly Wachowski",
+    "cast": [
+      {
+        "name": "Keanu Reeves",
+        "character": "Thomas A. Anderson / Neo",
+        "profile_path": "https://image.tmdb.org/t/p/w185/e1.jpg"
+      },
+      {
+        "name": "Laurence Fishburne",
+        "character": "Morpheus",
+        "profile_path": "https://image.tmdb.org/t/p/w185/e2.jpg"
+      },
+      {
+        "name": "Carrie-Anne Moss",
+        "character": "Trinity",
+        "profile_path": "https://image.tmdb.org/t/p/w185/e3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/7u3fhRw1RJ2gy5k8P8t0kL5tn.jpg",
+    "trailer_key": "vKQi3bBA1y8",
+    "category": "trending"
+  },
+  {
+    "id": 14,
+    "title": "In the Mood for Love",
+    "tagline": "Feel the presence of secrets.",
+    "year": 2000,
+    "release_date": "2000-09-29",
+    "genres": [
+      "Drama",
+      "Romance"
+    ],
+    "rating": 8.1,
+    "runtime": 98,
+    "overview": "Two neighbors, a woman and a man, form a strong bond after both suspect extramarital activities of their spouses. However, they agree to keep their bond platonic so as not to commit similar wrongs.",
+    "director": "Wong Kar-wai",
+    "cast": [
+      {
+        "name": "Tony Leung Chiu-wai",
+        "character": "Chow Mo-wan",
+        "profile_path": "https://image.tmdb.org/t/p/w185/f1.jpg"
+      },
+      {
+        "name": "Maggie Cheung",
+        "character": "Su Li-zhen",
+        "profile_path": "https://image.tmdb.org/t/p/w185/f2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/iY4vlOPQjU8X70M6a9h2v1Zz.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/gL08M8aP8t0kL5tnGzr.jpg",
+    "trailer_key": "24Z9l9g9P0k",
+    "category": "top_rated"
+  },
+  {
+    "id": 15,
+    "title": "The Dark Knight",
+    "tagline": "Why so serious?",
+    "year": 2008,
+    "release_date": "2008-07-18",
+    "genres": [
+      "Drama",
+      "Action",
+      "Crime",
+      "Thriller"
+    ],
+    "rating": 9.0,
+    "runtime": 152,
+    "overview": "Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets.",
+    "director": "Christopher Nolan",
+    "cast": [
+      {
+        "name": "Christian Bale",
+        "character": "Bruce Wayne / Batman",
+        "profile_path": "https://image.tmdb.org/t/p/w185/g1.jpg"
+      },
+      {
+        "name": "Heath Ledger",
+        "character": "Joker",
+        "profile_path": "https://image.tmdb.org/t/p/w185/g2.jpg"
+      },
+      {
+        "name": "Michael Caine",
+        "character": "Alfred Pennyworth",
+        "profile_path": "https://image.tmdb.org/t/p/w185/g3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/nMKdUUepR0i5zn0y1T4CsSB5chy.jpg",
+    "trailer_key": "EXeTwQWrcwY",
+    "category": "top_rated"
+  },
+  {
+    "id": 16,
+    "title": "Past Lives",
+    "tagline": "In-Yun.",
+    "year": 2023,
+    "release_date": "2023-06-02",
+    "genres": [
+      "Drama",
+      "Romance"
+    ],
+    "rating": 8.0,
+    "runtime": 106,
+    "overview": "Nora and Hae Sung, two deeply connected childhood friends, are wrested apart after Nora's family emigrates from South Korea. Two decades later, they are reunited in New York for one fateful week.",
+    "director": "Celine Song",
+    "cast": [
+      {
+        "name": "Greta Lee",
+        "character": "Nora",
+        "profile_path": "https://image.tmdb.org/t/p/w185/h1.jpg"
+      },
+      {
+        "name": "Teo Yoo",
+        "character": "Hae Sung",
+        "profile_path": "https://image.tmdb.org/t/p/w185/h2.jpg"
+      },
+      {
+        "name": "John Magaro",
+        "character": "Arthur",
+        "profile_path": "https://image.tmdb.org/t/p/w185/h3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/k3waqVXSnvCZWfJYNtdamTgTtTA.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/2wT8s8aP8t0kL5tnGzr0.jpg",
+    "trailer_key": "kA244xewjcI",
+    "category": "trending"
+  },
+  {
+    "id": 17,
+    "title": "Furiosa: A Mad Max Saga",
+    "tagline": "Out of nowhere.",
+    "year": 2024,
+    "release_date": "2024-05-24",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Science Fiction"
+    ],
+    "rating": 7.9,
+    "runtime": 148,
+    "overview": "As the world fell, young Furiosa is snatched from the Green Place of Many Mothers and falls into the hands of a great Biker Horde led by the Warlord Dementus.",
+    "director": "George Miller",
+    "cast": [
+      {
+        "name": "Anya Taylor-Joy",
+        "character": "Imperator Furiosa",
+        "profile_path": "https://image.tmdb.org/t/p/w185/i1.jpg"
+      },
+      {
+        "name": "Chris Hemsworth",
+        "character": "Dementus",
+        "profile_path": "https://image.tmdb.org/t/p/w185/i2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/iADOJ8Zymht2JPMoy3R7xUMZ51.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/wNAhuOZ3Zf89vV333O3vR0.jpg",
+    "trailer_key": "XJMuhwVlca4",
+    "category": "trending"
+  },
+  {
+    "id": 18,
+    "title": "No Country for Old Men",
+    "tagline": "There are no clean getaways.",
+    "year": 2007,
+    "release_date": "2007-11-09",
+    "genres": [
+      "Crime",
+      "Drama",
+      "Thriller"
+    ],
+    "rating": 8.2,
+    "runtime": 122,
+    "overview": "Llewelyn Moss stumbles upon dead bodies, $2 million and a hoard of heroin in a Texas desert, but methodical killer Anton Chigurh comes looking for it, with local sheriff Ed Tom Bell hot on his trail.",
+    "director": "Joel Coen, Ethan Coen",
+    "cast": [
+      {
+        "name": "Tommy Lee Jones",
+        "character": "Ed Tom Bell",
+        "profile_path": "https://image.tmdb.org/t/p/w185/j1.jpg"
+      },
+      {
+        "name": "Javier Bardem",
+        "character": "Anton Chigurh",
+        "profile_path": "https://image.tmdb.org/t/p/w185/j2.jpg"
+      },
+      {
+        "name": "Josh Brolin",
+        "character": "Llewelyn Moss",
+        "profile_path": "https://image.tmdb.org/t/p/w185/j3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/6d5XOczGDGw5um1e53Jk07mYh1a.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/s40P9lY89f89vV333O3vR0.jpg",
+    "trailer_key": "38A__WT3-o0",
+    "category": "top_rated"
+  },
+  {
+    "id": 19,
+    "title": "2001: A Space Odyssey",
+    "tagline": "An epic drama of adventure and exploration.",
+    "year": 1968,
+    "release_date": "1968-04-02",
+    "genres": [
+      "Science Fiction",
+      "Mystery",
+      "Adventure"
+    ],
+    "rating": 8.3,
+    "runtime": 149,
+    "overview": "Humanity finds a mysterious object buried beneath the lunar surface and sets off to find its origins with the help of HAL 9000, the world's most advanced supercomputer.",
+    "director": "Stanley Kubrick",
+    "cast": [
+      {
+        "name": "Keir Dullea",
+        "character": "Dr. David Bowman",
+        "profile_path": "https://image.tmdb.org/t/p/w185/k1.jpg"
+      },
+      {
+        "name": "Gary Lockwood",
+        "character": "Dr. Frank Poole",
+        "profile_path": "https://image.tmdb.org/t/p/w185/k2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/ve72VxNqjGM69UmKAdORW9rIRq5.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/by60P9lY89f89vV333O3vR0.jpg",
+    "trailer_key": "oR_e9y-Xx80",
+    "category": "top_rated"
+  },
+  {
+    "id": 20,
+    "title": "Cinema Paradiso",
+    "tagline": "A celebration of youth, friendship, and the everlasting magic of the movies.",
+    "year": 1988,
+    "release_date": "1988-11-17",
+    "genres": [
+      "Drama",
+      "Romance"
+    ],
+    "rating": 8.5,
+    "runtime": 124,
+    "overview": "A filmmaker recalls his childhood when falling in love with the pictures at the cinema of his home village and forms a deep friendship with the cinema's projectionist.",
+    "director": "Giuseppe Tornatore",
+    "cast": [
+      {
+        "name": "Philippe Noiret",
+        "character": "Alfredo",
+        "profile_path": "https://image.tmdb.org/t/p/w185/l1.jpg"
+      },
+      {
+        "name": "Salvatore Cascio",
+        "character": "Salvatore Di Vita (Child)",
+        "profile_path": "https://image.tmdb.org/t/p/w185/l2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/8j58i4u55Q49uJ3pB79rP7T0.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/u18vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "C2-xAIdfcrE",
+    "category": "top_rated"
+  },
+  {
+    "id": 21,
+    "title": "Megalopolis",
+    "tagline": "The future is today.",
+    "year": 2024,
+    "release_date": "2024-09-27",
+    "genres": [
+      "Science Fiction",
+      "Drama"
+    ],
+    "rating": 6.8,
+    "runtime": 138,
+    "overview": "An architect wants to rebuild New York City as a utopia following a devastating disaster, pitting him against the conservative city mayor.",
+    "director": "Francis Ford Coppola",
+    "cast": [
+      {
+        "name": "Adam Driver",
+        "character": "Cesar Catilina",
+        "profile_path": "https://image.tmdb.org/t/p/w185/m1.jpg"
+      },
+      {
+        "name": "Nathalie Emmanuel",
+        "character": "Julia Cicero",
+        "profile_path": "https://image.tmdb.org/t/p/w185/m2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/8dD2qP1n8eN6n9rP7T0kL5tnGzr.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/v58vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "RHLANXb7zF0",
+    "category": "coming_soon"
+  },
+  {
+    "id": 22,
+    "title": "Gladiator II",
+    "tagline": "What we do in life echoes in eternity.",
+    "year": 2024,
+    "release_date": "2024-11-22",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Drama"
+    ],
+    "rating": 7.8,
+    "runtime": 148,
+    "overview": "Years after witnessing the death of the revered hero Maximus at the hands of his uncle, Lucius must enter the Colosseum after his home is conquered by the tyrannical Emperors who now lead Rome.",
+    "director": "Ridley Scott",
+    "cast": [
+      {
+        "name": "Paul Mescal",
+        "character": "Lucius Verus",
+        "profile_path": "https://image.tmdb.org/t/p/w185/n1.jpg"
+      },
+      {
+        "name": "Pedro Pascal",
+        "character": "Marcus Acacius",
+        "profile_path": "https://image.tmdb.org/t/p/w185/n2.jpg"
+      },
+      {
+        "name": "Denzel Washington",
+        "character": "Macrinus",
+        "profile_path": "https://image.tmdb.org/t/p/w185/n3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/euYIwmwkmz95mnExjquf09v5.jpg",
+    "trailer_key": "4rgYUipGJNo",
+    "category": "coming_soon"
+  },
+  {
+    "id": 23,
+    "title": "Nosferatu",
+    "tagline": "Succumb to the darkness.",
+    "year": 2024,
+    "release_date": "2024-12-25",
+    "genres": [
+      "Horror",
+      "Mystery"
+    ],
+    "rating": 8.0,
+    "runtime": 132,
+    "overview": "A gothic tale of obsession between a haunted young woman and the terrifying vampire infatuated with her, causing untold horror in its wake.",
+    "director": "Robert Eggers",
+    "cast": [
+      {
+        "name": "Bill Skarsgård",
+        "character": "Count Orlok",
+        "profile_path": "https://image.tmdb.org/t/p/w185/o1.jpg"
+      },
+      {
+        "name": "Nicholas Hoult",
+        "character": "Thomas Hutter",
+        "profile_path": "https://image.tmdb.org/t/p/w185/o2.jpg"
+      },
+      {
+        "name": "Lily-Rose Depp",
+        "character": "Ellen Hutter",
+        "profile_path": "https://image.tmdb.org/t/p/w185/o3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/5R8vV333O3vR0kL5tnGzrP7T0.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/w68vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "nulvWqYUM8k",
+    "category": "coming_soon"
+  },
+  {
+    "id": 24,
+    "title": "Chinatown",
+    "tagline": "Forget it, Jake. It's Chinatown.",
+    "year": 1974,
+    "release_date": "1974-06-20",
+    "genres": [
+      "Mystery",
+      "Drama",
+      "Crime"
+    ],
+    "rating": 8.2,
+    "runtime": 130,
+    "overview": "A private detective hired to expose an adulterer finds himself caught in a web of deceit, corruption, and murder in 1930s Southern California.",
+    "director": "Roman Polanski",
+    "cast": [
+      {
+        "name": "Jack Nicholson",
+        "character": "J.J. 'Jake' Gittes",
+        "profile_path": "https://image.tmdb.org/t/p/w185/p1.jpg"
+      },
+      {
+        "name": "Faye Dunaway",
+        "character": "Evelyn Cross Mulwray",
+        "profile_path": "https://image.tmdb.org/t/p/w185/p2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/8d8vV333O3vR0kL5tnGzrP7T0.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/x88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "3a0K8k8k8k8",
+    "category": "top_rated"
+  },
+  {
+    "id": 25,
+    "title": "Seven Samurai",
+    "tagline": "The Magnificent Seven were eight… they were nine… they were twelve… now they are Seven Samurai!",
+    "year": 1954,
+    "release_date": "1954-04-26",
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "rating": 8.6,
+    "runtime": 207,
+    "overview": "A poor village under attack by bandits recruits seven unemployed samurai to help them defend themselves against the marauders.",
+    "director": "Akira Kurosawa",
+    "cast": [
+      {
+        "name": "Toshiro Mifune",
+        "character": "Kikuchiyo",
+        "profile_path": "https://image.tmdb.org/t/p/w185/q1.jpg"
+      },
+      {
+        "name": "Takashi Shimura",
+        "character": "Kambei Shimada",
+        "profile_path": "https://image.tmdb.org/t/p/w185/q2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/8OKm79IoSD2wRoc5uqIRvDaxh4.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/y88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "wJ1TOratCTo",
+    "category": "top_rated"
+  },
+  {
+    "id": 26,
+    "title": "Taxi Driver",
+    "tagline": "On every street in every city, there's a nobody who dreams of being a somebody.",
+    "year": 1976,
+    "release_date": "1976-02-08",
+    "genres": [
+      "Crime",
+      "Drama"
+    ],
+    "rating": 8.2,
+    "runtime": 114,
+    "overview": "A mentally unstable veteran works as a nighttime taxi driver in New York City, where the perceived decadence and sleaze fuels his urge for violent action.",
+    "director": "Martin Scorsese",
+    "cast": [
+      {
+        "name": "Robert De Niro",
+        "character": "Travis Bickle",
+        "profile_path": "https://image.tmdb.org/t/p/w185/r1.jpg"
+      },
+      {
+        "name": "Jodie Foster",
+        "character": "Iris Steensma",
+        "profile_path": "https://image.tmdb.org/t/p/w185/r2.jpg"
+      },
+      {
+        "name": "Cybill Shepherd",
+        "character": "Betsy",
+        "profile_path": "https://image.tmdb.org/t/p/w185/r3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/ekstpH69PgBhMwXM91H1EK6OpIO.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/z88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "T549y62Vv78",
+    "category": "top_rated"
+  },
+  {
+    "id": 27,
+    "title": "Citizen Kane",
+    "tagline": "It's Terrific!",
+    "year": 1941,
+    "release_date": "1941-05-01",
+    "genres": [
+      "Mystery",
+      "Drama"
+    ],
+    "rating": 8.3,
+    "runtime": 119,
+    "overview": "Following the death of publishing tycoon Charles Foster Kane, reporters scramble to uncover the meaning of his final utterance: 'Rosebud'.",
+    "director": "Orson Welles",
+    "cast": [
+      {
+        "name": "Orson Welles",
+        "character": "Charles Foster Kane",
+        "profile_path": "https://image.tmdb.org/t/p/w185/s1.jpg"
+      },
+      {
+        "name": "Joseph Cotten",
+        "character": "Jedediah Leland",
+        "profile_path": "https://image.tmdb.org/t/p/w185/s2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/sav0jxhqiH0bPr2vZFU0Kjt2nZL.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/a88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "8dxh3lwdOFw",
+    "category": "top_rated"
+  },
+  {
+    "id": 28,
+    "title": "Mulholland Drive",
+    "tagline": "A love story in the city of dreams.",
+    "year": 2001,
+    "release_date": "2001-10-12",
+    "genres": [
+      "Mystery",
+      "Drama",
+      "Thriller"
+    ],
+    "rating": 8.0,
+    "runtime": 147,
+    "overview": "After a car wreck on the winding Mulholland Drive renders a woman amnesiac, she and a perky Hollywood-hopeful search for clues and answers across Los Angeles in a twisting venture beyond dreams and reality.",
+    "director": "David Lynch",
+    "cast": [
+      {
+        "name": "Naomi Watts",
+        "character": "Betty Elms / Diane Selwyn",
+        "profile_path": "https://image.tmdb.org/t/p/w185/t1.jpg"
+      },
+      {
+        "name": "Laura Harring",
+        "character": "Rita / Camilla Rhodes",
+        "profile_path": "https://image.tmdb.org/t/p/w185/t2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/oTOin5bK6wZqjZ3a6Qz4o4v0kL.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/b88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "jbZJ4P85vcw",
+    "category": "trending"
+  },
+  {
+    "id": 29,
+    "title": "La La Land",
+    "tagline": "Here's to the fools who dream.",
+    "year": 2016,
+    "release_date": "2016-12-09",
+    "genres": [
+      "Comedy",
+      "Drama",
+      "Romance",
+      "Music"
+    ],
+    "rating": 8.0,
+    "runtime": 128,
+    "overview": "While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations for the future.",
+    "director": "Damien Chazelle",
+    "cast": [
+      {
+        "name": "Ryan Gosling",
+        "character": "Sebastian Wilder",
+        "profile_path": "https://image.tmdb.org/t/p/w185/u1.jpg"
+      },
+      {
+        "name": "Emma Stone",
+        "character": "Mia Dolan",
+        "profile_path": "https://image.tmdb.org/t/p/w185/u2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/uDO8zWDBLWStuzKG8CHtistPtW5.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/c88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "0pdqf4P9MB8",
+    "category": "trending"
+  },
+  {
+    "id": 30,
+    "title": "Whiplash",
+    "tagline": "The road to greatness can take you to the edge.",
+    "year": 2014,
+    "release_date": "2014-10-10",
+    "genres": [
+      "Drama",
+      "Music"
+    ],
+    "rating": 8.5,
+    "runtime": 107,
+    "overview": "Under the direction of a ruthless instructor, a talented young drummer begins to pursue perfection at any cost, even his humanity.",
+    "director": "Damien Chazelle",
+    "cast": [
+      {
+        "name": "Miles Teller",
+        "character": "Andrew Neiman",
+        "profile_path": "https://image.tmdb.org/t/p/w185/v1.jpg"
+      },
+      {
+        "name": "J.K. Simmons",
+        "character": "Terence Fletcher",
+        "profile_path": "https://image.tmdb.org/t/p/w185/v2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/7fn624j5lj3xTme2SgiLCeuedmO.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/d88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "7d_jQycdQGo",
+    "category": "top_rated"
+  },
+  {
+    "id": 31,
+    "title": "Stalker",
+    "tagline": "The wish machine awaits.",
+    "year": 1979,
+    "release_date": "1979-05-25",
+    "genres": [
+      "Science Fiction",
+      "Drama"
+    ],
+    "rating": 8.2,
+    "runtime": 162,
+    "overview": "Near a nameless city exists the Zone, an alienated and guarded area where laws of physics no longer apply. A guide known as a 'Stalker' leads a writer and a scientist through the hazard.",
+    "director": "Andrei Tarkovsky",
+    "cast": [
+      {
+        "name": "Alexander Kaidanovsky",
+        "character": "The Stalker",
+        "profile_path": "https://image.tmdb.org/t/p/w185/w1.jpg"
+      },
+      {
+        "name": "Anatoly Solonitsyn",
+        "character": "The Writer",
+        "profile_path": "https://image.tmdb.org/t/p/w185/w2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/lA936l1w2gZ3a6Qz4o4v0kL5.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/e88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "TGRDYpCmMcM",
+    "category": "top_rated"
+  },
+  {
+    "id": 32,
+    "title": "Alien",
+    "tagline": "In space no one can hear you scream.",
+    "year": 1979,
+    "release_date": "1979-05-25",
+    "genres": [
+      "Horror",
+      "Science Fiction"
+    ],
+    "rating": 8.5,
+    "runtime": 117,
+    "overview": "During its return to the earth, commercial spaceship Nostromo intercepts a distress signal from a distant planet. When a team searches the area, they discover a nest of alien eggs.",
+    "director": "Ridley Scott",
+    "cast": [
+      {
+        "name": "Sigourney Weaver",
+        "character": "Ellen Ripley",
+        "profile_path": "https://image.tmdb.org/t/p/w185/x1.jpg"
+      },
+      {
+        "name": "Tom Skerritt",
+        "character": "Dallas",
+        "profile_path": "https://image.tmdb.org/t/p/w185/x2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/vfrQk5IPloGg2v9EDUtxg2vBXYw.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/f88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "LjLamj-b0I8",
+    "category": "top_rated"
+  },
+  {
+    "id": 33,
+    "title": "Apocalypse Now",
+    "tagline": "The horror... the horror...",
+    "year": 1979,
+    "release_date": "1979-08-15",
+    "genres": [
+      "Drama",
+      "War"
+    ],
+    "rating": 8.3,
+    "runtime": 147,
+    "overview": "At the height of the Vietnam war, Captain Benjamin L. Willard is sent on a dangerous mission that, officially, 'does not exist, nor will it ever exist.' His goal is to assassinate a renegade Green Beret Colonel.",
+    "director": "Francis Ford Coppola",
+    "cast": [
+      {
+        "name": "Martin Sheen",
+        "character": "Captain Benjamin L. Willard",
+        "profile_path": "https://image.tmdb.org/t/p/w185/y1.jpg"
+      },
+      {
+        "name": "Marlon Brando",
+        "character": "Colonel Walter E. Kurtz",
+        "profile_path": "https://image.tmdb.org/t/p/w185/y2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/gQB8Y5RScZ9P9O9pB79rP7T0.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/g88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "FTjG-Aux_y4",
+    "category": "top_rated"
+  },
+  {
+    "id": 34,
+    "title": "Blade Runner",
+    "tagline": "Man has made his match... now it's his problem.",
+    "year": 1982,
+    "release_date": "1982-06-25",
+    "genres": [
+      "Science Fiction",
+      "Drama",
+      "Thriller"
+    ],
+    "rating": 8.1,
+    "runtime": 117,
+    "overview": "In the smog-choked dystopian Los Angeles of 2019, blade runner Rick Deckard is called out of retirement to terminate a quartet of replicants who have escaped to Earth.",
+    "director": "Ridley Scott",
+    "cast": [
+      {
+        "name": "Harrison Ford",
+        "character": "Rick Deckard",
+        "profile_path": "https://image.tmdb.org/t/p/w185/z1.jpg"
+      },
+      {
+        "name": "Rutger Hauer",
+        "character": "Roy Batty",
+        "profile_path": "https://image.tmdb.org/t/p/w185/z2.jpg"
+      },
+      {
+        "name": "Sean Young",
+        "character": "Rachael",
+        "profile_path": "https://image.tmdb.org/t/p/w185/z3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/h88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "eogpIG53Cjc",
+    "category": "top_rated"
+  },
+  {
+    "id": 35,
+    "title": "Everything Everywhere All at Once",
+    "tagline": "The universe is so much bigger than you realize.",
+    "year": 2022,
+    "release_date": "2022-03-24",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Science Fiction"
+    ],
+    "rating": 8.1,
+    "runtime": 139,
+    "overview": "An aging Chinese immigrant is swept up in an insane adventure, where she alone can save what's important to her by connecting with the lives she could have led in other universes.",
+    "director": "Daniel Kwan, Daniel Scheinert",
+    "cast": [
+      {
+        "name": "Michelle Yeoh",
+        "character": "Evelyn Wang",
+        "profile_path": "https://image.tmdb.org/t/p/w185/aa1.jpg"
+      },
+      {
+        "name": "Ke Huy Quan",
+        "character": "Waymond Wang",
+        "profile_path": "https://image.tmdb.org/t/p/w185/aa2.jpg"
+      },
+      {
+        "name": "Stephanie Hsu",
+        "character": "Joy Wang / Jobu Tupaki",
+        "profile_path": "https://image.tmdb.org/t/p/w185/aa3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/w3LxiVYPqDYolursqZuvT0693Zq.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/i88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "wxN1T1uxQ2g",
+    "category": "trending"
+  },
+  {
+    "id": 36,
+    "title": "Poor Things",
+    "tagline": "She's like nothing you've ever seen.",
+    "year": 2023,
+    "release_date": "2023-12-08",
+    "genres": [
+      "Science Fiction",
+      "Romance",
+      "Comedy"
+    ],
+    "rating": 7.8,
+    "runtime": 141,
+    "overview": "The incredible tale about the fantastical evolution of Bella Baxter, a young woman brought back to life by the brilliant and unorthodox scientist Dr. Godwin Baxter.",
+    "director": "Yorgos Lanthimos",
+    "cast": [
+      {
+        "name": "Emma Stone",
+        "character": "Bella Baxter",
+        "profile_path": "https://image.tmdb.org/t/p/w185/bb1.jpg"
+      },
+      {
+        "name": "Mark Ruffalo",
+        "character": "Duncan Wedderburn",
+        "profile_path": "https://image.tmdb.org/t/p/w185/bb2.jpg"
+      },
+      {
+        "name": "Willem Dafoe",
+        "character": "Dr. Godwin Baxter",
+        "profile_path": "https://image.tmdb.org/t/p/w185/bb3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXq3rXM6c5w9c0P.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/j88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "RlbR5N6veqw",
+    "category": "trending"
+  },
+  {
+    "id": 37,
+    "title": "Drive",
+    "tagline": "There are no clean getaways.",
+    "year": 2011,
+    "release_date": "2011-09-16",
+    "genres": [
+      "Drama",
+      "Action",
+      "Thriller",
+      "Crime"
+    ],
+    "rating": 7.9,
+    "runtime": 100,
+    "overview": "A Hollywood stunt performer who moonlights as a wheelman for criminals discovers that a contract has been put on him after a heist goes wrong.",
+    "director": "Nicolas Winding Refn",
+    "cast": [
+      {
+        "name": "Ryan Gosling",
+        "character": "Driver",
+        "profile_path": "https://image.tmdb.org/t/p/w185/cc1.jpg"
+      },
+      {
+        "name": "Carey Mulligan",
+        "character": "Irene",
+        "profile_path": "https://image.tmdb.org/t/p/w185/cc2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/602vev09aAgqlHpk2j1bY46Q0L.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/k88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "KBiOF3y1W0Y",
+    "category": "trending"
+  },
+  {
+    "id": 38,
+    "title": "Spider-Man: Across the Spider-Verse",
+    "tagline": "It's how you wear the mask that matters.",
+    "year": 2023,
+    "release_date": "2023-06-02",
+    "genres": [
+      "Animation",
+      "Action",
+      "Adventure",
+      "Science Fiction"
+    ],
+    "rating": 8.6,
+    "runtime": 140,
+    "overview": "After reuniting with Gwen Stacy, Brooklyn's full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse's very existence.",
+    "director": "Joaquim Dos Santos, Kemp Powers, Justin K. Thompson",
+    "cast": [
+      {
+        "name": "Shameik Moore",
+        "character": "Miles Morales / Spider-Man",
+        "profile_path": "https://image.tmdb.org/t/p/w185/dd1.jpg"
+      },
+      {
+        "name": "Hailee Steinfeld",
+        "character": "Gwen Stacy / Spider-Woman",
+        "profile_path": "https://image.tmdb.org/t/p/w185/dd2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/l88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "cqGjhVJWtEg",
+    "category": "trending"
+  },
+  {
+    "id": 39,
+    "title": "GoodFellas",
+    "tagline": "Three Decades of Life in the Mafia.",
+    "year": 1990,
+    "release_date": "1990-09-12",
+    "genres": [
+      "Drama",
+      "Crime"
+    ],
+    "rating": 8.7,
+    "runtime": 145,
+    "overview": "The story of Henry Hill and his life in the mafia, covering his relationship with his wife Karen and his mob partners Jimmy Conway and Tommy DeVito.",
+    "director": "Martin Scorsese",
+    "cast": [
+      {
+        "name": "Ray Liotta",
+        "character": "Henry Hill",
+        "profile_path": "https://image.tmdb.org/t/p/w185/ee1.jpg"
+      },
+      {
+        "name": "Robert De Niro",
+        "character": "James Conway",
+        "profile_path": "https://image.tmdb.org/t/p/w185/ee2.jpg"
+      },
+      {
+        "name": "Joe Pesci",
+        "character": "Tommy DeVito",
+        "profile_path": "https://image.tmdb.org/t/p/w185/ee3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/aKuFiU82s5ISJpGZp7YkIr3kCUd.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/m88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "2ilzidi_J8Q",
+    "category": "top_rated"
+  },
+  {
+    "id": 40,
+    "title": "Fight Club",
+    "tagline": "Mischief. Mayhem. Soap.",
+    "year": 1999,
+    "release_date": "1999-10-15",
+    "genres": [
+      "Drama"
+    ],
+    "rating": 8.8,
+    "runtime": 139,
+    "overview": "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground 'fight clubs' forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
+    "director": "David Fincher",
+    "cast": [
+      {
+        "name": "Edward Norton",
+        "character": "The Narrator",
+        "profile_path": "https://image.tmdb.org/t/p/w185/ff1.jpg"
+      },
+      {
+        "name": "Brad Pitt",
+        "character": "Tyler Durden",
+        "profile_path": "https://image.tmdb.org/t/p/w185/ff2.jpg"
+      },
+      {
+        "name": "Helena Bonham Carter",
+        "character": "Marla Singer",
+        "profile_path": "https://image.tmdb.org/t/p/w185/ff3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/n88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "O1nDozs-Lda8",
+    "category": "top_rated"
+  },
+  {
+    "id": 41,
+    "title": "Mickey 17",
+    "tagline": "Dying is a living.",
+    "year": 2025,
+    "release_date": "2025-01-31",
+    "genres": [
+      "Science Fiction",
+      "Comedy",
+      "Adventure"
+    ],
+    "rating": 7.7,
+    "runtime": 135,
+    "overview": "An expendable employee sent on a human expedition to colonize the ice world Niflheim refuses to let his replacement clone take his place.",
+    "director": "Bong Joon-ho",
+    "cast": [
+      {
+        "name": "Robert Pattinson",
+        "character": "Mickey Barnes",
+        "profile_path": "https://image.tmdb.org/t/p/w185/gg1.jpg"
+      },
+      {
+        "name": "Naomi Ackie",
+        "character": "Nasha Adjaya",
+        "profile_path": "https://image.tmdb.org/t/p/w185/gg2.jpg"
+      },
+      {
+        "name": "Steven Yeun",
+        "character": "Berto",
+        "profile_path": "https://image.tmdb.org/t/p/w185/gg3.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/x7V8s8aP8t0kL5tnGzrP7T0.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/o88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "osYpGSz_W84",
+    "category": "coming_soon"
+  },
+  {
+    "id": 42,
+    "title": "The Wild Robot",
+    "tagline": "Discover your true nature.",
+    "year": 2024,
+    "release_date": "2024-09-27",
+    "genres": [
+      "Animation",
+      "Family",
+      "Science Fiction"
+    ],
+    "rating": 8.5,
+    "runtime": 102,
+    "overview": "After a shipwreck, an intelligent robot named Roz is stranded on an uninhabited island. To survive the harsh environment, Roz bonds with the island's animals and cares for an orphaned baby goose.",
+    "director": "Chris Sanders",
+    "cast": [
+      {
+        "name": "Lupita Nyong'o",
+        "character": "ROZZUM unit 7134 ('Roz')",
+        "profile_path": "https://image.tmdb.org/t/p/w185/hh1.jpg"
+      },
+      {
+        "name": "Pedro Pascal",
+        "character": "Fink",
+        "profile_path": "https://image.tmdb.org/t/p/w185/hh2.jpg"
+      }
+    ],
+    "poster_url": "https://image.tmdb.org/t/p/w500/wTnV3PCso5v9e68vV333O3vR0.jpg",
+    "backdrop_url": "https://image.tmdb.org/t/p/original/p88vV333O3vR0kL5tnGzr.jpg",
+    "trailer_key": "67vbA5ZJdKQ",
+    "category": "now_showing"
+  }
+]
