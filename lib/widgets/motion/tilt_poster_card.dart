@@ -43,6 +43,14 @@ class _TiltPosterCardState extends State<TiltPosterCard>
       vsync: this,
       duration: CinemaMotion.base,
     );
+    _springController.addListener(() {
+      if (mounted) {
+        setState(() {
+          _tiltX = _springAnimX?.value ?? 0.0;
+          _tiltY = _springAnimY?.value ?? 0.0;
+        });
+      }
+    });
   }
 
   @override
@@ -79,15 +87,6 @@ class _TiltPosterCardState extends State<TiltPosterCard>
     _springController.reset();
     _springController.forward();
 
-    _springController.addListener(() {
-      if (mounted) {
-        setState(() {
-          _tiltX = _springAnimX?.value ?? 0.0;
-          _tiltY = _springAnimY?.value ?? 0.0;
-        });
-      }
-    });
-
     setState(() {
       _isHovered = false;
     });
@@ -106,7 +105,13 @@ class _TiltPosterCardState extends State<TiltPosterCard>
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final cardSize = Size(constraints.maxWidth, constraints.maxHeight);
+        final w = constraints.hasBoundedWidth && !constraints.maxWidth.isInfinite
+            ? constraints.maxWidth
+            : 220.0;
+        final h = constraints.hasBoundedHeight && !constraints.maxHeight.isInfinite
+            ? constraints.maxHeight
+            : 360.0;
+        final cardSize = Size(w, h);
 
         // Calculate 3D perspective matrix
         final Matrix4 transform = Matrix4.identity()

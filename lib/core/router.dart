@@ -3,11 +3,8 @@
 // custom PageRouteBuilder transitions (Iris, Fade-Through-Black "cut", Horizontal "wipe").
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../theme/tokens.dart';
 import '../theme/motion.dart';
-import '../providers/auth_provider.dart';
-import '../widgets/motion/iris_shutter_transition.dart';
 import '../screens/splash_screen.dart';
 import '../screens/home_screen.dart';
 import '../screens/explore_screen.dart';
@@ -25,7 +22,16 @@ class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     // Parse route name
     final uri = Uri.parse(settings.name ?? '/');
-    final path = uri.path;
+    var path = uri.path;
+
+    // Normalize base-href for GitHub Pages: strip /reelhouse-movie-explorer prefix
+    if (path.startsWith('/reelhouse-movie-explorer')) {
+      path = path.substring('/reelhouse-movie-explorer'.length);
+    }
+    if (path.isEmpty) path = '/';
+    if (path.length > 1 && path.endsWith('/')) {
+      path = path.substring(0, path.length - 1);
+    }
 
     switch (path) {
       case '/':
@@ -55,20 +61,10 @@ class AppRouter {
         return horizontalWipeRoute(const WatchlistScreen(), settings);
 
       case '/profile':
-        return PageRouteBuilder(
-          settings: settings,
-          pageBuilder: (context, animation, secondaryAnimation) {
-            final auth = context.watch<AuthProvider>();
-            // Route guard: if not logged in, redirect to login
-            if (!auth.isLoggedIn) {
-              return const LoginSignupScreen(redirectPath: '/profile');
-            }
-            return const ProfileScreen();
-          },
-        );
+        return horizontalWipeRoute(const ProfileScreen(), settings);
 
       case '/login':
-        return IrisPageRoute(page: const LoginSignupScreen(), settings: settings);
+        return fadeThroughBlackRoute(const LoginSignupScreen(), settings);
 
       case '/about':
         return horizontalWipeRoute(const AboutScreen(), settings);

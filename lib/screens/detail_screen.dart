@@ -117,7 +117,14 @@ class _DetailScreenState extends State<DetailScreen> {
             pinned: true,
             leading: IconButton(
               icon: const Icon(Icons.arrow_back, color: CinemaTokens.projectorAmber),
-              onPressed: () => Navigator.of(context).pop(),
+              tooltip: 'Return to Cinema Catalog',
+              onPressed: () {
+                if (Navigator.of(context).canPop()) {
+                  Navigator.of(context).pop();
+                } else {
+                  Navigator.of(context).pushReplacementNamed('/home');
+                }
+              },
             ),
             flexibleSpace: FlexibleSpaceBar(
               background: Stack(

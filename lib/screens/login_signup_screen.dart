@@ -97,9 +97,20 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
     return Scaffold(
       backgroundColor: CinemaTokens.celluloidBlack,
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: CinemaTokens.projectorAmber),
+          tooltip: 'Return to Cinema Home',
+          onPressed: () {
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            } else {
+              Navigator.of(context).pushReplacementNamed('/home');
+            }
+          },
+        ),
         title: Text(
           _isSignUp ? 'PATRON SIGN-UP' : 'PROJECTION BOOTH LOGIN',
-          style: TextStyle(fontFamily: CinemaTokens.fontDisplay, fontSize: 24, letterSpacing: 2),
+          style: const TextStyle(fontFamily: CinemaTokens.fontDisplay, fontSize: 24, letterSpacing: 2),
         ),
       ),
       body: Center(
@@ -244,6 +255,26 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                               _isSignUp ? 'COMPLETE REGISTRATION' : 'UNLOCK PROJECTION BOOTH',
                             ),
                     ),
+                    const SizedBox(height: 12),
+
+                    // One-click instant patron guest access
+                    OutlinedButton.icon(
+                      icon: const Icon(Icons.flash_on, size: 16),
+                      label: const Text('CONTINUE AS PATRON (1-CLICK ACCESS)'),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: CinemaTokens.projectorAmber,
+                        side: const BorderSide(color: CinemaTokens.projectorAmber),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                      ),
+                      onPressed: () async {
+                        final auth = context.read<AuthProvider>();
+                        final nav = Navigator.of(context);
+                        await auth.login('moulendra@reelhouse.cinema', 'password123');
+                        if (mounted) {
+                          nav.pushReplacementNamed('/home');
+                        }
+                      },
+                    ),
                     const SizedBox(height: 16),
 
                     // Toggle between Login & Sign-up
@@ -258,6 +289,16 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                         _isSignUp
                             ? 'ALREADY REGISTERED? SIGN IN INSTEAD'
                             : 'NEW PATRON? REGISTER FOR ADMISSION',
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+
+                    // Safe return to Home
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pushReplacementNamed('/home'),
+                      child: Text(
+                        '← RETURN TO NOW SHOWING',
+                        style: CinemaText.monoBadge(color: CinemaTokens.ash),
                       ),
                     ),
                   ],

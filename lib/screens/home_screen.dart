@@ -20,7 +20,6 @@ import '../widgets/motion/hero_carousel_ken_burns.dart';
 import '../widgets/motion/projector_beam_particles.dart';
 import '../widgets/motion/marquee_ticker.dart';
 import '../widgets/motion/scroll_reveal_stagger.dart';
-import '../widgets/motion/reel_cursor.dart';
 import '../widgets/empty_state.dart';
 import '../widgets/error_state.dart';
 import '../widgets/motion/film_leader_skeleton.dart';
@@ -178,9 +177,9 @@ class HomeScreen extends StatelessWidget {
 
           return ScrollRevealStagger(
             index: index,
-            child: MouseRegion(
-              onEnter: (_) => ReelCursorScope.setMode(context, CursorMode.view),
-              onExit: (_) => ReelCursorScope.setMode(context, CursorMode.normal),
+            child: SizedBox(
+              width: 220,
+              height: 360,
               child: TiltPosterCard(
                 onTap: () => _openDetail(context, movie),
                 child: TicketStubCard(
