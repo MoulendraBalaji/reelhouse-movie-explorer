@@ -1,0 +1,32 @@
+# ==============================================================================
+# REELHOUSE DOCUMENTATION REPORT CONFIGURATION
+# Edit the student, faculty, and institutional placeholders below.
+# Running 'python docs/generate_report.py' will dynamically regenerate the PDF.
+# ==============================================================================
+
+student:
+  name: "Moulendra Balaji"
+  roll_number: "22CS1042"
+  department: "Department of Computer Science & Engineering"
+  degree: "Bachelor of Technology in Computer Science and Engineering"
+  semester: "VII Semester"
+
+institution:
+  college_name: "Institute of Technology & Advanced Studies"
+  subject_code: "CS7801"
+  subject_name: "Mobile & Web Application Development Laboratory"
+  academic_year: "2026 - 2027"
+  submission_date: "November 2026"
+
+faculty:
+  guide_name: "Dr. K. S. Ramanathan, Ph.D."
+  guide_designation: "Professor & Head, Department of CSE"
+  evaluator_name: "External Examiner"
+
+project:
+  title: "REELHOUSE"
+  tagline: "Every Film, One Reel at a Time"
+  subtitle: "A High-Performance Kinematic Movie Explorer Flutter Web Application"
+  version: "1.0.0+1"
+  github_repo: "https://github.com/MoulendraBalaji/reelhouse-movie-explorer"
+  live_url: "https://moulendrabalaji.github.io/reelhouse-movie-explorer/"
